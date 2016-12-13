@@ -1,0 +1,135 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+
+android {
+    compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId "com.xtagwgj.app"
+        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
+        targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
+    }
+
+//    signingConfigs {
+//        release {
+//            storeFile file("myreleasekey.keystore")
+//            storePassword "password"
+//            keyAlias "MyReleaseKey"
+//            keyPassword "password"
+//        }
+//    }
+
+    buildTypes {
+        debug {
+            resValue "string", "app_name", "${APK_TEST_NAME}"
+
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+        }
+
+        release {
+            resValue "string", "app_name", "${APK_RELEASE_NAME}"
+
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+
+            //apk命名
+            android.applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        //这里修改apk文件名
+                        def fileName = "${APK_RELEASE_NAME}_${buildType.name}_v${defaultConfig.versionName}_${releaseTime()}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude "META-INF/LICENSE"
+        exclude "META-INF/NOTICE"
+        exclude "META-INF/LICENSE.txt"
+
+    }
+
+    //设置虚拟机堆内存空间大小，避免在编译期间OOM
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+    }
+    //打包不检查
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    //导入的android的系统包
+    compile "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}"
+//    compile "com.android.support:design:${SUPPORT_LIBRARY}"
+
+    //导入的jar包中的文件
+
+    //依赖的第三方包
+
+    //https://github.com/weavey/LoadingLayoutDemo
+//    compile 'com.lai.weavey:loadinglayout:1.3.1'
+
+    //ButterKnife
+//    compile "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
+//    apt "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
+
+//    compile 'com.zhy:autolayout:1.4.5'
+
+    //捕捉crash https://github.com/Sunzxyong/Recovery/blob/master/README.md
+    compile 'com.zxy.android:recovery:0.0.8'
+
+//    //6.0权限管理 http://chen-wei.me/2016/11/10/android-permission-best-practice/
+//    compile 'pub.devrel:easypermissions:0.2.1'
+
+//    compile "com.trello:rxlifecycle:${RX_LIFECYCLE_VERSION}"
+//    compile "com.trello:rxlifecycle-components:${RX_LIFECYCLE_VERSION}"
+
+    //RxJava,RxAndroid结合Retrofit
+//    compile "io.reactivex:rxjava:${RX_JAVA_VERSION}"
+//    compile "io.reactivex:rxandroid:${RX_ANDROID_VERSION}"
+
+//    compile "com.squareup.retrofit2:retrofit:${RETROFIT2_VERSION}"
+//    compile "com.squareup.retrofit2:converter-gson:${RETROFIT2_VERSION}"
+//    compile "com.squareup.retrofit2:adapter-rxjava:${RETROFIT2_VERSION}"
+//    compile "com.squareup.okhttp3:logging-interceptor:${OKHTTP3_LOGGING_INTERCEPTOR}"
+
+    compile "com.google.dagger:dagger:${DAGGER2_VERSION}"
+    apt "com.google.dagger:dagger-compiler:${DAGGER2_VERSION}"
+    provided "org.glassfish:javax.annotation:${ANNOTATION_VERSION}"
+
+
+    compile project(path: ':library:common')
+    compile project(path: ':library:irecyclerview')
+    compile project(path: ':library:retrofitutils')
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
