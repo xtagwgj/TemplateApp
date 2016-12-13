@@ -1,0 +1,50 @@
+{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset134 PingFangSC-Regular;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red255\green255\blue255;\red109\green109\blue109;
+}
+{\*\expandedcolortbl;\csgray\c100000;\cssrgb\c20000\c20000\c20000;\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c50196\c50196;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28300\viewh14960\viewkind0
+\deftab720
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth4012\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
+\clmrg \clvertalt \clshdrawnil \clwWidth4012\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl400\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 *
+\f1 .apk\
+*.ap_\
+\
+*.dex\
+*.class\
+\
+bin/\
+gen/\
+out/\
+\
+.gradle/\
+build/\
+\
+local.properties\
+\
+proguard/\
+\
+*.log\
+\
+.navigation/\
+\
+captures/\
+\
+*.iml\
+.idea/workspace.xml\
+.idea/tasks.xml\
+.idea/libraries\
+\
+*.jks\
+\
+.externalNativeBuild\
+\cell 
+\pard\intbl\itap1\cell \lastrow\row
+}
