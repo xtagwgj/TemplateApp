@@ -1,6 +1,39 @@
 # TemplateApp
 RxJava+RxAndroid+Retrofit模版
 
+##统一管理
+```
+//将gradle中要引用的信息放在project目录的build.gradle文件中进行统一的管理
+ext {
+    configuration = [
+            package_name     : "com.xtagwgj.app",
+            buildToolsVersion: "25.0.1",
+            compileVersion   : 25,
+            minSdk           : 19,
+            targetSdk        : 25,
+            version_code     : 1,
+            version_name     : "1.0.0",
+            debug_app_name   : "测试版",
+            release_app_name : "正式版"
+    ]
+
+    libraries = [
+            supportVersion  : "25.0.1",
+            dagger          : "2.0.2",
+            javax_annotation: "10.0-b28",
+            butterknief     : "8.4.0",
+            xlog            : "1.3.0"
+    ]
+}
+
+//local.properties 存放敏感数据, 例如某些插件需要 用户名, 密码, api_key 等, 与隐私相关的数据.
+#私有参数
+keystore_file       =xtagwgj.jks
+store_pwd           =123456
+alis_key            =zy
+key_pwd             =123456
+```
+
 ##自带的库
 ###common
 #####第三方库
@@ -20,7 +53,7 @@ RxJava+RxAndroid+Retrofit模版
 ------------- | -------------
 AppManager |activity管理
 BaseActivity BaesFragment|普通activity和fragment的基类，继承自RxAppCompatActivity、RxFragment
-BaseMvpActivity BaseMvpFragment|使用Mvp方式继承的父类，继承自RxAppCompatActivity、RxFragment
+BaseMvpActivity BaseMvpFragment|使用Mvp要继承的基类，继承自RxAppCompatActivity、RxFragment
 BaseFragmentAdapter|
 BaseFragmentStateAdapter|
 BaseModel|
