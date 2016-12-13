@@ -1,5 +1,12 @@
 package com.xtagwgj.app;
 
+import com.elvishew.xlog.LogConfiguration;
+import com.elvishew.xlog.LogLevel;
+import com.elvishew.xlog.XLog;
+import com.elvishew.xlog.printer.Printer;
+import com.elvishew.xlog.printer.file.FilePrinter;
+import com.elvishew.xlog.printer.file.backup.NeverBackupStrategy;
+import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator;
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.loadinglayout.LoadingLayout;
 
@@ -13,6 +20,16 @@ public class MyApplication extends BaseApplication {
         super.onCreate();
 
         initLoadingLayout();
+        initLogger();
+    }
+
+    private void initLogger() {
+        LogConfiguration config = new LogConfiguration.Builder()
+                .logLevel(BuildConfig.DEBUG ? LogLevel.ALL : LogLevel.NONE)
+                .b()
+                .build();
+
+        XLog.init(config);
     }
 
     private void initLoadingLayout() {
@@ -28,6 +45,6 @@ public class MyApplication extends BaseApplication {
                 .setReloadButtonText("点我重试哦")
                 .setReloadButtonTextSize(14)
                 .setReloadButtonTextColor(R.color.gray)
-                .setReloadButtonWidthAndHeight(150,40);
+                .setReloadButtonWidthAndHeight(150, 40);
     }
 }

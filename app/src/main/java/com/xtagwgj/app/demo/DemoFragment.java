@@ -6,10 +6,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
+import com.jakewharton.rxbinding.widget.RxTextView;
 import com.xtagwgj.app.R;
 import com.xtagwgj.common.base.BaseFragment;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * Created by xtagwgj on 2016/12/11.
@@ -29,6 +35,11 @@ public class DemoFragment extends BaseFragment implements DemoContract.View {
     @BindView(R.id.et_input)
     EditText etInputShowText;
 
+    @BindView(R.id.btn_changeTitle)
+    Button btn_changeTitle;
+
+    TextView mainTitle;
+
 
     public static DemoFragment newInstance() {
         return new DemoFragment();
@@ -39,6 +50,7 @@ public class DemoFragment extends BaseFragment implements DemoContract.View {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //
+        mainTitle = (TextView) getActivity().findViewById(R.id.tvTitle);
 
     }
 
@@ -49,13 +61,32 @@ public class DemoFragment extends BaseFragment implements DemoContract.View {
 
     @Override
     protected void initView() {
-        mPresenter.saveTask("testTitle", "");
+        mPresenter.saveTask("testTitle");
+    }
+
+    @Override
+    protected void initEventListener() {
+        RxView.clicks(btnShowText)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe(aVoid -> {
+                    RxTextView.textChanges(etInputShowText).subscribe(charSequence -> {
+                        mPresenter.saveTask(charSequence.toString());
+                    });
+                });
+
+        RxView.clicks(btn_changeTitle)
+                .throttleFirst(1,TimeUnit.SECONDS)
+                .subscribe(aVoid -> {
+                  RxTextView.textChanges(etInputShowText).subscribe(charSequence -> {
+                     mainTitle.setText(charSequence);
+                  });
+                });
     }
 
     @Override
     public void setTitle(String title) {
-        mTitle.setText(title);
-
+        if (mTitle != null)
+            mTitle.setText(title);
     }
 
     @Override
@@ -72,6 +103,6 @@ public class DemoFragment extends BaseFragment implements DemoContract.View {
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+        mPresenter.unSubscribe();
     }
 }

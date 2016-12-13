@@ -6,21 +6,17 @@ package com.xtagwgj.app.demo;
 
 public class DemoPresenter implements DemoContract.Presenter {
 
-    private String title;
-    private String description;
     private DemoContract.View mView;
 
-    DemoPresenter(String title, String description, DemoContract.View mView) {
-        this.title = title;
-        this.description = description;
+    DemoPresenter(String title, DemoContract.View mView) {
         this.mView = mView;
+        mView.setTitle(title);
     }
 
 
     @Override
-    public void saveTask(String title, String description) {
-        mView.setTitle(title + description);
-
+    public void saveTask(String title) {
+        mView.setTitle(title);
     }
 
     @Override
@@ -29,7 +25,7 @@ public class DemoPresenter implements DemoContract.Presenter {
     }
 
     @Override
-    public void unsubscribe() {
+    public void unSubscribe() {
 
     }
 }

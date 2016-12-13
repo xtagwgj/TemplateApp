@@ -16,7 +16,7 @@ public class DemoContract {
 
     interface Presenter extends BasePresenter {
 
-        void saveTask(String title, String description);
+        void saveTask(String title);
 
     }
 }

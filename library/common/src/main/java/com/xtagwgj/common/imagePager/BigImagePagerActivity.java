@@ -172,11 +172,6 @@ public class BigImagePagerActivity extends BaseActivity {
                                 BigImagePagerActivity.this.overridePendingTransition(R.anim.act_fade_in_center,
                                         R.anim.act_fade_out_center);
                             }
-
-                            @Override
-                            public void onOutsidePhotoTap() {
-
-                            }
                         });
 
                 //loading

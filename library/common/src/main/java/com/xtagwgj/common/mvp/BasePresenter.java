@@ -7,6 +7,6 @@ package com.xtagwgj.common.mvp;
 public interface BasePresenter {
     void subscribe();
 
-    void unsubscribe();
+    void unSubscribe();
 
 }

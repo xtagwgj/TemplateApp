@@ -2,31 +2,33 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
+def cfg = rootProject.ext.configuration //配置
+def libs = rootProject.ext.libraries    //第三方库
 
 android {
-    compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
-    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+    compileSdkVersion cfg.compileVersion
+    buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.xtagwgj.app"
-        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
-        targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
-        versionCode VERSION_CODE as int
-        versionName VERSION_NAME
+        applicationId cfg.package_name
+        minSdkVersion cfg.minSdk
+        targetSdkVersion cfg.targetSdk
+        versionCode cfg.version_code
+        versionName cfg.version_name
     }
 
 //    signingConfigs {
 //        release {
-//            storeFile file("myreleasekey.keystore")
-//            storePassword "password"
-//            keyAlias "MyReleaseKey"
-//            keyPassword "password"
+//            storeFile file("${keystore_file}")
+//            storePassword "${store_pwd}"
+//            keyAlias "${alias_key}"
+//            keyPassword "${key_pwd}"
 //        }
 //    }
 
     buildTypes {
         debug {
-            resValue "string", "app_name", "${APK_TEST_NAME}"
+            resValue "string", "app_name", "${cfg.debug_app_name}"
 
             applicationIdSuffix ".debug"
             minifyEnabled false
@@ -35,7 +37,7 @@ android {
         }
 
         release {
-            resValue "string", "app_name", "${APK_RELEASE_NAME}"
+            resValue "string", "app_name", "${cfg.release_app_name}"
 
             minifyEnabled true
             zipAlignEnabled true
@@ -49,7 +51,7 @@ android {
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         //这里修改apk文件名
-                        def fileName = "${APK_RELEASE_NAME}_${buildType.name}_v${defaultConfig.versionName}_${releaseTime()}.apk"
+                        def fileName = "${cfg.release_app_name}_${buildType.name}_v${defaultConfig.versionName}_${releaseTime()}.apk"
                         output.outputFile = new File(outputFile.parent, fileName)
                     }
                 }
@@ -86,48 +88,30 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     //导入的android的系统包
-    compile "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}"
-//    compile "com.android.support:design:${SUPPORT_LIBRARY}"
+//    compile "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}"
 
     //导入的jar包中的文件
+    compile project(path: ':library:common')
+    compile project(path: ':library:irecyclerview')
+    compile project(path: ':library:retrofitutils')
 
     //依赖的第三方包
-
-    //https://github.com/weavey/LoadingLayoutDemo
-//    compile 'com.lai.weavey:loadinglayout:1.3.1'
-
-    //ButterKnife
-//    compile "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
-//    apt "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
-
-//    compile 'com.zhy:autolayout:1.4.5'
 
     //捕捉crash https://github.com/Sunzxyong/Recovery/blob/master/README.md
     compile 'com.zxy.android:recovery:0.0.8'
 
-//    //6.0权限管理 http://chen-wei.me/2016/11/10/android-permission-best-practice/
-//    compile 'pub.devrel:easypermissions:0.2.1'
+    //dagger
+    compile "com.google.dagger:dagger:${libs.dagger}"
+    apt "com.google.dagger:dagger-compiler:${libs.dagger}"
+    provided "org.glassfish:javax.annotation:${libs.javax_annotation}"
 
-//    compile "com.trello:rxlifecycle:${RX_LIFECYCLE_VERSION}"
-//    compile "com.trello:rxlifecycle-components:${RX_LIFECYCLE_VERSION}"
+    //butterknife
+    compile "com.jakewharton:butterknife:${libs.butterknief}"//view注解
+    apt "com.jakewharton:butterknife-compiler:${libs.butterknief}"
 
-    //RxJava,RxAndroid结合Retrofit
-//    compile "io.reactivex:rxjava:${RX_JAVA_VERSION}"
-//    compile "io.reactivex:rxandroid:${RX_ANDROID_VERSION}"
+    //日志
+    compile "com.elvishew:xlog:${libs.xlog}"
 
-//    compile "com.squareup.retrofit2:retrofit:${RETROFIT2_VERSION}"
-//    compile "com.squareup.retrofit2:converter-gson:${RETROFIT2_VERSION}"
-//    compile "com.squareup.retrofit2:adapter-rxjava:${RETROFIT2_VERSION}"
-//    compile "com.squareup.okhttp3:logging-interceptor:${OKHTTP3_LOGGING_INTERCEPTOR}"
-
-    compile "com.google.dagger:dagger:${DAGGER2_VERSION}"
-    apt "com.google.dagger:dagger-compiler:${DAGGER2_VERSION}"
-    provided "org.glassfish:javax.annotation:${ANNOTATION_VERSION}"
-
-
-    compile project(path: ':library:common')
-    compile project(path: ':library:irecyclerview')
-    compile project(path: ':library:retrofitutils')
 }
 
 def releaseTime() {

@@ -5,11 +5,20 @@
     android:id="@+id/loadingLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:isFirstVisible="false"
+    app:isFirstVisible="true"
     tools:context="com.xtagwgj.app.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_toDemo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray"
+            android:text="Hello World!" />
+    </RelativeLayout>
+
 </com.xtagwgj.common.loadinglayout.LoadingLayout>

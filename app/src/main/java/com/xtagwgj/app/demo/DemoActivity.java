@@ -23,6 +23,8 @@ public class DemoActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        tvTitle= (TextView) findViewById(R.id.tvTitle);
+
         DemoFragment demoFragment =
                 (DemoFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
 
@@ -41,7 +43,7 @@ public class DemoActivity extends BaseActivity {
         }
 
         // Create the presenter
-        demoPresenter = new DemoPresenter(tvTitle.getText().toString(), "", demoFragment);
+        demoPresenter = new DemoPresenter(tvTitle.getText().toString() ,demoFragment);
 
         demoFragment.setPresenter(demoPresenter);
 

@@ -51,6 +51,8 @@ public abstract class BaseFragment extends RxFragment {
     //初始化view
     protected abstract void initView();
 
+    protected abstract void initEventListener();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public abstract class BaseFragment extends RxFragment {
         mRxManager = new RxManager();
         unbind = ButterKnife.bind(this, rootView);
         initView();
+        initEventListener();
         return rootView;
     }
 

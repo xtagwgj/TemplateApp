@@ -28,7 +28,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/toast_stroke_gray" />
+        android:background="@color/toast_stroke_gray"
+        android:text="修改文字" />
+
+    <Button
+        android:id="@+id/btn_changeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/toast_stroke_gray"
+        android:text="修改标题" />
 
 
 </LinearLayout>

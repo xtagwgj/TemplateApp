@@ -13,7 +13,6 @@ buildscript {
         classpath 'me.tatarka:gradle-retrolambda:3.4.0'
 
 
-
     }
 }
 
@@ -29,4 +28,26 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    configuration = [
+            package_name     : "com.xtagwgj.app",
+            buildToolsVersion: "25.0.1",
+            compileVersion   : 25,
+            minSdk           : 19,
+            targetSdk        : 25,
+            version_code     : 1,
+            version_name     : "1.0.0",
+            debug_app_name   : "测试版",
+            release_app_name : "正式版"
+    ]
+
+    libraries = [
+            supportVersion  : "25.0.1",
+            dagger          : "2.0.2",
+            javax_annotation: "10.0-b28",
+            butterknief     : "8.4.0",
+            xlog            : "1.3.0"
+    ]
 }
