@@ -11,6 +11,13 @@ public class ChangeModeHelper {
 
     public static final int MODE_NIGHT = 2;
     private static String Mode = "mode";
+
+    /**
+     *
+     * @param ctx
+     * @param mode MODE_DAY
+     *             MODE_NIGHT
+     */
     public static void setChangeMode(Context ctx, int mode){
         SharedPreferences sp = ctx.getSharedPreferences("config_mode", Context.MODE_PRIVATE);
         sp.edit().putInt(Mode, mode).commit();

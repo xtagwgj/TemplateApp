@@ -41,6 +41,12 @@ public class BigImagePagerActivity extends BaseActivity {
     private List<View> guideViewList = new ArrayList<View>();
     private LinearLayout guideGroup;
 
+    /**
+     *
+     * @param activity
+     * @param imgUrls 图片地址的集合
+     * @param position 当前查看图片的位置
+     */
     public static void startImagePagerActivity(Activity activity, List<String> imgUrls, int position) {
         Intent intent = new Intent(activity, BigImagePagerActivity.class);
         intent.putStringArrayListExtra(INTENT_IMGURLS, new ArrayList<String>(imgUrls));
