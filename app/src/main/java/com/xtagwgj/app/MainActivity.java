@@ -3,12 +3,18 @@ package com.xtagwgj.app;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.elvishew.xlog.XLog;
 import com.jakewharton.rxbinding.view.RxView;
 import com.xtagwgj.app.demo.DemoActivity;
+import com.xtagwgj.app.http.ApiUser;
+import com.xtagwgj.app.model.LoginInfoResponse;
 import com.xtagwgj.common.base.BaseActivity;
 import com.xtagwgj.common.commonutils.ToastUtils;
 import com.xtagwgj.common.loadinglayout.LoadingLayout;
+import com.xtagwgj.retrofitutils.http.factory.HttpOnNextListener;
+import com.xtagwgj.retrofitutils.http.factory.ProgressSubscriber;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -17,7 +23,7 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
     //最后一次点击后退的时间
-    private long exitTime=0l;
+    private long exitTime = 0l;
     private LoadingLayout loadingLayout;
 
     @Override
@@ -62,10 +68,27 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initEventListener() {
         RxView.clicks(findViewById(R.id.btn_toDemo))
-                .throttleFirst(1,TimeUnit.SECONDS)
+                .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(aVoid -> {
                     startActivity(DemoActivity.class);
                 });
+
+        new ApiUser().login(this, "18566077938", "123456", new ProgressSubscriber<List<LoginInfoResponse>>(new HttpOnNextListener<List<LoginInfoResponse>>() {
+            @Override
+            public void onNext(List<LoginInfoResponse> o) {
+                if (o != null) {
+                    LoginInfoResponse loginInfoResponse = o.get(0);
+                    XLog.d(loginInfoResponse);
+                } else {
+                    ToastUtils.showLongToast(MainActivity.this, "o is null");
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                ToastUtils.showLongToast(MainActivity.this, throwable == null ? "throwable is null" : throwable.getMessage());
+            }
+        }, this));
 
     }
 
@@ -79,7 +102,7 @@ public class MainActivity extends BaseActivity {
 
     private boolean isConsumeBackKey() {
         if ((System.currentTimeMillis() - exitTime) > 2000) {//未处理监听事件，请求后续监听
-            ToastUtils.showShortToastSafe(this,"再按一次退出程序");
+            ToastUtils.showShortToastSafe(this, "再按一次退出程序");
             exitTime = System.currentTimeMillis();
         } else {
             finish();

@@ -1,4 +1,4 @@
-package com.xtagwgj.retrofitutils.http.response;
+package com.xtagwgj.app.model;
 
 /**
  * 网络请求返回对象公共抽象类

@@ -1,8 +1,8 @@
-package com.xtagwgj.retrofitutils.http;
+package com.xtagwgj.app.http;
 
 import android.util.Log;
 
-import com.xtagwgj.retrofitutils.http.response.RequestResult;
+import com.xtagwgj.app.model.RequestResult;
 
 import rx.functions.Func1;
 
@@ -23,6 +23,6 @@ public class HttpResultFunc<T> implements Func1<RequestResult<T>, T> {
             throw new ApiException(tRequestResult.getError_desc());
         }
 
-        return tRequestResult.getObj();
+        return  tRequestResult.getObj();
     }
 }

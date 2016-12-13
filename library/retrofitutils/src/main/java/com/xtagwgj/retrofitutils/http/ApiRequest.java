@@ -3,6 +3,7 @@ package com.xtagwgj.retrofitutils.http;
 
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.commonutils.NetWorkUtils;
+import com.xtagwgj.common.commonutils.StringUtils;
 import com.xtagwgj.retrofitutils.BuildConfig;
 
 import java.io.File;
@@ -31,16 +32,25 @@ public enum ApiRequest {
     instance;
 
     private Retrofit retrofit;
-    private static final String BASE_URL = "http:/183.61.80.249:8080/property/";
+    private String BASE_URL = "http:/183.61.80.249:8080/property/";
 
     private static final int DEFAULT_TIMEOUT = 5;
 
     ApiRequest() {
+        initRetrofit(BASE_URL);
+    }
+
+    public void initRetrofit(String baseUrl) {
+        if (!BASE_URL.equalsIgnoreCase(baseUrl)) {
+            this.BASE_URL = baseUrl;
+            if (retrofit != null)
+                retrofit = null;
+        }
 
         OkHttpClient client = createOkHttpBuilder().build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
@@ -179,8 +189,10 @@ public enum ApiRequest {
      * @return
      */
     public <T> T create(Class<T> service) {
-        if (retrofit == null)
-            throw new NullPointerException("retrofit is null");
+        if (retrofit == null) {
+            initRetrofit(BASE_URL);
+        }
+
         return retrofit.create(service);
     }
 

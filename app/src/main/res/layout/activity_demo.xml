@@ -11,10 +11,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/gray"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/font_large"
+        android:textSize="@dimen/font_normal3"
         tools:text="标题" />
 
     <FrameLayout

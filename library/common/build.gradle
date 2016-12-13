@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 
+def libs = rootProject.ext.libraries    //第三方库
 
 android {
     compileSdkVersion 25
@@ -30,42 +31,39 @@ dependencies {
 //    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
 //        exclude group: 'com.android.support', module: 'support-annotations'
 //    })
-    compile 'com.android.support:support-v4:25.0.1'
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile "com.android.support:design:25.0.1"
-
+    compile "com.android.support:support-v4:${libs.supportVersion}"
+    compile "com.android.support:appcompat-v7:${libs.supportVersion}"
+    compile "com.android.support:design:${libs.supportVersion}"
 
     compile files('libs/commons-codec-1.6.jar')
 
-    compile 'com.zhy:autolayout:1.4.5'
+    compile "com.zhy:autolayout:${libs.autolayout}"
 
-    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
-    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:1.0.0'
-    compile 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
-
-//    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.0'
-//    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:1.0.0'
+    compile "com.jakewharton.rxbinding:rxbinding:${libs.rxbinding}"
+    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${libs.rxbinding}"
+    compile "com.jakewharton.rxbinding:rxbinding-design:${libs.rxbinding}"
+    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${libs.rxbinding}"
+    compile "com.jakewharton.rxbinding:rxbinding-support-v4:${libs.rxbinding}"
 
     //6.0权限管理 http://chen-wei.me/2016/11/10/android-permission-best-practice/
-    compile 'pub.devrel:easypermissions:0.2.1'
+    compile "pub.devrel:easypermissions:${libs.easypermissions}"
 
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile "io.reactivex:rxjava:${libs.rxjava}"
+    compile "io.reactivex:rxandroid:${libs.rxandroid}"
 
-    compile "com.trello:rxlifecycle:1.0"
-    compile "com.trello:rxlifecycle-components:1.0"
+    compile "com.trello:rxlifecycle:${libs.rxlifecycle}"
+    compile "com.trello:rxlifecycle-components:${libs.rxlifecycle}"
 
+    compile "com.jakewharton:butterknife:${libs.butterknief}"//view注解
+    apt "com.jakewharton:butterknife-compiler:${libs.butterknief}"
 
-    compile 'com.jakewharton:butterknife:8.4.0'//view注解
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    compile 'com.android.support:multidex:1.0.0'//分包
-    compile 'com.github.bumptech.glide:glide:3.6.1'//显示图片框架
-    compile 'com.commit451:PhotoView:1.2.4'//图片缩放
+    compile "com.android.support:multidex:${libs.multidex}"//分包
+    compile "com.github.bumptech.glide:glide:${libs.glide}"//显示图片框架
+    compile "com.commit451:PhotoView:${libs.photoview}"//图片缩放
 
 //    https://github.com/bingoogolapple/BGAPhotoPicker-Android
-    compile 'cn.bingoogolapple:bga-adapter:1.1.0@aar'
-    compile 'cn.bingoogolapple:bga-photopicker:1.2.0@aar'
+    compile "cn.bingoogolapple:bga-adapter:${libs.photopicker_adapter}"
+    compile "cn.bingoogolapple:bga-photopicker:${libs.photopicker}"
 
 
 }

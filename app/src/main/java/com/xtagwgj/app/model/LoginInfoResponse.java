@@ -1,4 +1,4 @@
-package com.xtagwgj.retrofitutils.http.response;
+package com.xtagwgj.app.model;
 
 import com.google.gson.annotations.SerializedName;
 

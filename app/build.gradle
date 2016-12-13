@@ -98,7 +98,7 @@ dependencies {
     //依赖的第三方包
 
     //捕捉crash https://github.com/Sunzxyong/Recovery/blob/master/README.md
-    compile 'com.zxy.android:recovery:0.0.8'
+    compile "com.zxy.android:recovery:${libs.recovery}"
 
     //dagger
     compile "com.google.dagger:dagger:${libs.dagger}"

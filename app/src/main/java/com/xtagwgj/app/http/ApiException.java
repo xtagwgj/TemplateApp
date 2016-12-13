@@ -1,8 +1,8 @@
-package com.xtagwgj.retrofitutils.http;
+package com.xtagwgj.app.http;
 
 /**
- * 错误吗转换
- * Created by xtagwgj on 16/9/25.
+ * 对服务器返回的错误代码或信息进行处理
+ * Created by xtagwgj on 2016/12/13.
  */
 
 public class ApiException extends RuntimeException {
@@ -16,6 +16,7 @@ public class ApiException extends RuntimeException {
     public ApiException(String detailMessage) {
         super(detailMessage);
     }
+
 
     /**
      * 由于服务器传递过来的错误信息直接给用户看的话，用户未必能够理解
@@ -37,6 +38,6 @@ public class ApiException extends RuntimeException {
                 message = "未知错误";
 
         }
-        return message;
+        return "";
     }
 }
