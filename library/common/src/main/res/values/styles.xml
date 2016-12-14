@@ -15,7 +15,7 @@
     </style>
     <!--冷启动界面-->
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <!--白天主题，此处直接和AppTheme一样-->

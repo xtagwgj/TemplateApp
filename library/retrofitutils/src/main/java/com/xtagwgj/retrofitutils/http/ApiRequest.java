@@ -3,8 +3,7 @@ package com.xtagwgj.retrofitutils.http;
 
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.commonutils.NetWorkUtils;
-import com.xtagwgj.common.commonutils.StringUtils;
-import com.xtagwgj.retrofitutils.BuildConfig;
+import com.xtagwgj.retrofitutils.http.cookie.CookiesManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,21 +32,31 @@ public enum ApiRequest {
 
     private Retrofit retrofit;
     private String BASE_URL = "http:/183.61.80.249:8080/property/";
+    private boolean showLog = true;
 
     private static final int DEFAULT_TIMEOUT = 5;
 
     ApiRequest() {
-        initRetrofit(BASE_URL);
+        initRetrofit(BASE_URL, true);
     }
 
-    public void initRetrofit(String baseUrl) {
+    public String getBASE_URL() {
+        return new String(BASE_URL);
+    }
+
+    /**
+     * @param baseUrl 服务器地址
+     * @param showLog 是否显示日志
+     */
+    public void initRetrofit(String baseUrl, boolean showLog) {
         if (!BASE_URL.equalsIgnoreCase(baseUrl)) {
             this.BASE_URL = baseUrl;
+            this.showLog = showLog;
             if (retrofit != null)
                 retrofit = null;
         }
 
-        OkHttpClient client = createOkHttpBuilder().build();
+        OkHttpClient client = createOkHttpBuilder(showLog).build();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -62,9 +71,12 @@ public enum ApiRequest {
      *
      * @return builder
      */
-    private OkHttpClient.Builder createOkHttpBuilder() {
+    private OkHttpClient.Builder createOkHttpBuilder(boolean showLog) {
         //手动创建一个OkHttpClient并设置超时时间
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+        //cookie
+        httpClientBuilder.cookieJar(new CookiesManager());
+        //
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
@@ -85,13 +97,11 @@ public enum ApiRequest {
 //        httpClientBuilder.addInterceptor(getPublicParameter());
 //        httpClientBuilder.addInterceptor(getHeaderParameter());
 
-        if (BuildConfig.DEBUG) {
-            /**
-             * 设置日志
-             */
+        /**
+         * 设置日志
+         */
+        if (showLog)
             httpClientBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
-            // httpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
-        }
 
         return httpClientBuilder;
     }
@@ -111,6 +121,7 @@ public enum ApiRequest {
                 if (!NetWorkUtils.isNetConnected(BaseApplication.getAppContext())) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
+                            .url(BASE_URL)
                             .build();
                 }
                 Response response = chain.proceed(request);
@@ -119,14 +130,14 @@ public enum ApiRequest {
                     // 有网络时 设置缓存超时时间0个小时
                     response.newBuilder()
                             .header("Cache-Control", "public, max-age=" + maxAge)
-                            .removeHeader("JavaDemo")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                            .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
                             .build();
                 } else {
                     // 无网络时，设置超时为4周
                     int maxStale = 60 * 60 * 24 * 28;
                     response.newBuilder()
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                            .removeHeader("nyn")
+                            .removeHeader("Pragma")
                             .build();
                 }
                 return response;
@@ -190,7 +201,7 @@ public enum ApiRequest {
      */
     public <T> T create(Class<T> service) {
         if (retrofit == null) {
-            initRetrofit(BASE_URL);
+            initRetrofit(BASE_URL, showLog);
         }
 
         return retrofit.create(service);

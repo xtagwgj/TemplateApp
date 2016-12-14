@@ -1,11 +1,12 @@
 package com.xtagwgj.retrofitutils.http.factory;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 
+import com.xtagwgj.common.commonwidget.LoadingDialog;
 import com.xtagwgj.common.commonutils.ToastUtils;
+import com.xtagwgj.retrofitutils.http.listener.HttpOnNextListener;
 
 import java.lang.ref.WeakReference;
 import java.net.ConnectException;
@@ -14,6 +15,7 @@ import java.net.SocketTimeoutException;
 import rx.Subscriber;
 
 /**
+ *
  * Created by xtagwgj on 2016/12/13.
  */
 
@@ -25,7 +27,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     //    是否能取消请求
     private boolean cancel;
     //    加载框可自己定义
-    private ProgressDialog pd;
+    private LoadingDialog pd;
 
     public ProgressSubscriber(HttpOnNextListener mSubscriberOnNextListener, Context context) {
         this.mSubscriberOnNextListener = mSubscriberOnNextListener;
@@ -48,7 +50,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     private void initProgressDialog() {
         Context context = mActivity.get();
         if (pd == null && context != null) {
-            pd = new ProgressDialog(context);
+            pd = new LoadingDialog(context);
             pd.setCancelable(cancel);
             if (cancel) {
                 pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -112,9 +114,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         Context context = mActivity.get();
         if (context == null) return;
         if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
-            ToastUtils.showShortToastSafe(context,"网络中断，请检查您的网络状态");
+            ToastUtils.showShortToastSafe(context, "网络中断，请检查您的网络状态");
         } else {
-            ToastUtils.showShortToastSafe(context,"错误" + e.getMessage());
+            ToastUtils.showShortToastSafe(context, "错误" + e.getMessage());
             Log.i("tag", "error----------->" + e.toString());
         }
         mSubscriberOnNextListener.onError(e);

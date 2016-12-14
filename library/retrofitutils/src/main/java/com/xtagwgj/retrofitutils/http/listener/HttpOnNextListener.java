@@ -1,4 +1,4 @@
-package com.xtagwgj.retrofitutils.http.factory;
+package com.xtagwgj.retrofitutils.http.listener;
 
 /**
  * Created by xtagwgj on 2016/12/13.

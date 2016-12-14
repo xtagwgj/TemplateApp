@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.xtagwgj.common.loadinglayout.LoadingLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loadingLayout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:isFirstVisible="true"
-    tools:context="com.xtagwgj.app.MainActivity">
+    android:fitsSystemWindows="true">
 
-    <RelativeLayout
+    <com.xtagwgj.common.commonwidget.NormalTitleBar
+        android:id="@+id/titleBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btn_toDemo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/gray"
-            android:text="Hello World!" />
-    </RelativeLayout>
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        tl:tl_iconHeight="20dp"
+        tl:tl_iconWidth="20dp"
+        tl:tl_indicator_color="@color/gray"
+        tl:tl_indicator_height="0dp"
+        tl:tl_textSelectColor="#FA7C20"
+        tl:tl_textUnselectColor="#808080"
+        tl:tl_textsize="11sp"
+        tl:tl_underline_height="0dp" />
 
-</com.xtagwgj.common.loadinglayout.LoadingLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/tab_layout"
+        android:background="@color/gray" />
+
+    <FrameLayout
+        android:id="@+id/fl_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/view"
+        android:layout_below="@id/titleBar" />
+
+
+</RelativeLayout>

@@ -41,7 +41,7 @@ public abstract class BaseActivity extends BaseCompatActivity {
         ButterKnife.bind(this);
         mContext = this;
 
-        this.initView();
+        this.initView(savedInstanceState);
         this.initEventListener();
     }
 

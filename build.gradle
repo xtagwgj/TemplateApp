@@ -23,6 +23,7 @@ plugins {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -40,7 +41,7 @@ ext {
             version_code     : 1,
             version_name     : "1.0.0",
             debug_app_name   : "测试版",
-            release_app_name : "正式版"
+            release_app_name : "物管正式版"
     ]
 
     libraries = [
@@ -58,11 +59,14 @@ ext {
             easypermissions    : "0.2.1",
             glide              : "3.6.1",
             photoview          : "1.2.4",
-            photopicker_adapter: "1.1.0@aar",
-            photopicker        : "1.2.0@aar",
             retrofit           : "2.1.0",
             okhttp             : "3.3.1",
             okio               : "1.6.0",
             recovery           : "0.0.8",
+            image_selector     : "1.2",
+            nine_grid_imageview: "1.0.2",
+            zxing              : "1.8",
+            bugly              : "2.3.6",
+            flyco_tablayout    : "2.1.0@aar",
     ]
 }

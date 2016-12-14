@@ -3,6 +3,7 @@ package com.xtagwgj.common.imagePager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -42,9 +43,8 @@ public class BigImagePagerActivity extends BaseActivity {
     private LinearLayout guideGroup;
 
     /**
-     *
      * @param activity
-     * @param imgUrls 图片地址的集合
+     * @param imgUrls  图片地址的集合
      * @param position 当前查看图片的位置
      */
     public static void startImagePagerActivity(Activity activity, List<String> imgUrls, int position) {
@@ -80,7 +80,7 @@ public class BigImagePagerActivity extends BaseActivity {
     }
 
     @Override
-    public void initView() {
+    public void initView(Bundle bundle) {
         //设置透明状态栏
         SetTranslanteBar();
 

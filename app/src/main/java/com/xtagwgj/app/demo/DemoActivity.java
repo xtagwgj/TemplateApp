@@ -1,12 +1,18 @@
 package com.xtagwgj.app.demo;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.TextView;
 
+import com.elvishew.xlog.XLog;
 import com.xtagwgj.app.R;
 import com.xtagwgj.common.base.BaseActivity;
 import com.xtagwgj.common.mvp.ActivityUtils;
 
+import java.util.List;
+
 import butterknife.BindView;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class DemoActivity extends BaseActivity {
 
@@ -22,8 +28,8 @@ public class DemoActivity extends BaseActivity {
 
 
     @Override
-    public void initView() {
-        tvTitle= (TextView) findViewById(R.id.tvTitle);
+    public void initView(Bundle saveInstantState) {
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
 
         DemoFragment demoFragment =
                 (DemoFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
@@ -43,7 +49,7 @@ public class DemoActivity extends BaseActivity {
         }
 
         // Create the presenter
-        demoPresenter = new DemoPresenter(tvTitle.getText().toString() ,demoFragment);
+        demoPresenter = new DemoPresenter(this, tvTitle.getText().toString(), demoFragment);
 
         demoFragment.setPresenter(demoPresenter);
 
@@ -53,5 +59,16 @@ public class DemoActivity extends BaseActivity {
     @Override
     public void initEventListener() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 111 && resultCode == RESULT_OK) {
+            List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+            String imagePath = path.get(0);
+            XLog.e(imagePath);
+            demoPresenter.uploadPic(imagePath);
+        }
     }
 }

@@ -3,12 +3,11 @@ package com.xtagwgj.app;
 import com.elvishew.xlog.LogConfiguration;
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
-import com.elvishew.xlog.printer.Printer;
-import com.elvishew.xlog.printer.file.FilePrinter;
-import com.elvishew.xlog.printer.file.backup.NeverBackupStrategy;
-import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.xtagwgj.app.base.Constant;
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.loadinglayout.LoadingLayout;
+import com.xtagwgj.retrofitutils.http.ApiRequest;
 
 /**
  * Created by xtagwgj on 2016/12/10.
@@ -19,11 +18,23 @@ public class MyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
 
+        initNet();
         initLoadingLayout();
         initLogger();
     }
 
+    private void initNet() {
+        /**
+         *
+         */
+        ApiRequest.instance.initRetrofit("http://iyuns.ylxmall.com:8080/property/", true);
+    }
+
     private void initLogger() {
+        //初始化bugly日志
+        CrashReport.initCrashReport(getApplicationContext(), Constant.CrashAppId, BuildConfig.DEBUG);
+
+        //初始化其他日志
         LogConfiguration config = new LogConfiguration.Builder()
                 .logLevel(BuildConfig.DEBUG ? LogLevel.ALL : LogLevel.NONE)
                 .b()

@@ -51,7 +51,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter, E extends BaseMod
             mPresenter.mContext = this;
         }
         this.initPresenter();
-        this.initView();
+        this.initView(savedInstanceState);
         this.initEventListener();
     }
 

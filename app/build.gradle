@@ -15,14 +15,15 @@ android {
         targetSdkVersion cfg.targetSdk
         versionCode cfg.version_code
         versionName cfg.version_name
+        vectorDrawables.useSupportLibrary = true
     }
 
 //    signingConfigs {
 //        release {
-//            storeFile file("${keystore_file}")
-//            storePassword "${store_pwd}"
-//            keyAlias "${alias_key}"
-//            keyPassword "${key_pwd}"
+//            storeFile file("${rootProject.keystore_file}")
+//            storePassword "${rootProject.store_pwd}"
+//            keyAlias "${rootProject.alias_key}"
+//            keyPassword "${rootProject.key_pwd}"
 //        }
 //    }
 
@@ -39,9 +40,9 @@ android {
         release {
             resValue "string", "app_name", "${cfg.release_app_name}"
 
-            minifyEnabled true
+            minifyEnabled false
             zipAlignEnabled true
-            shrinkResources true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
 
@@ -89,13 +90,17 @@ dependencies {
 
     //导入的android的系统包
 //    compile "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}"
+    testCompile 'junit:junit:4.12'
 
     //导入的jar包中的文件
     compile project(path: ':library:common')
     compile project(path: ':library:irecyclerview')
     compile project(path: ':library:retrofitutils')
+    compile project(path: ':library:jcvideoplayer')
 
     //依赖的第三方包
+
+    compile "com.flyco.tablayout:FlycoTabLayout_Lib:${libs.flyco_tablayout}"
 
     //捕捉crash https://github.com/Sunzxyong/Recovery/blob/master/README.md
     compile "com.zxy.android:recovery:${libs.recovery}"
@@ -111,6 +116,10 @@ dependencies {
 
     //日志
     compile "com.elvishew:xlog:${libs.xlog}"
+
+    //
+    compile "com.tencent.bugly:crashreport:${libs.bugly}"
+
 
 }
 

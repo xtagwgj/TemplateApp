@@ -47,6 +47,7 @@ public class ImageLoaderUtils {
                 .error(R.mipmap.ic_empty_picture)
                 .crossFade().into(imageView);
     }
+
     public static void displaySmallPhoto(Context context, ImageView imageView, String url) {
         if (imageView == null) {
             throw new IllegalArgumentException("argument error");
@@ -58,6 +59,7 @@ public class ImageLoaderUtils {
                 .thumbnail(0.5f)
                 .into(imageView);
     }
+
     public static void displayBigPhoto(Context context, ImageView imageView, String url) {
         if (imageView == null) {
             throw new IllegalArgumentException("argument error");
@@ -69,17 +71,31 @@ public class ImageLoaderUtils {
                 .error(R.mipmap.ic_empty_picture)
                 .into(imageView);
     }
-    public static void display(Context context, ImageView imageView, int url) {
+
+    public static void displayBigPhoto(Context context, ImageView imageView, int resId) {
         if (imageView == null) {
             throw new IllegalArgumentException("argument error");
         }
-        Glide.with(context).load(url)
+        Glide.with(context).load(resId).asBitmap()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.mipmap.ic_image_loading)
+                .error(R.mipmap.ic_empty_picture)
+                .into(imageView);
+    }
+
+    public static void display(Context context, ImageView imageView, int resId) {
+        if (imageView == null) {
+            throw new IllegalArgumentException("argument error");
+        }
+        Glide.with(context).load(resId)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .placeholder(R.mipmap.ic_image_loading)
                 .error(R.mipmap.ic_empty_picture)
                 .crossFade().into(imageView);
     }
+
     public static void displayRound(Context context, ImageView imageView, String url) {
         if (imageView == null) {
             throw new IllegalArgumentException("argument error");

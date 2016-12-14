@@ -1,3 +1,8 @@
 <resources>
-
+    <string-array name="navi_bottom_name">
+        <item>维修</item>
+        <item>公告</item>
+        <item>管理</item>
+        <item>我的</item>
+    </string-array>
 </resources>

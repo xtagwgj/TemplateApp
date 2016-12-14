@@ -62,8 +62,11 @@ dependencies {
     compile "com.commit451:PhotoView:${libs.photoview}"//图片缩放
 
 //    https://github.com/bingoogolapple/BGAPhotoPicker-Android
-    compile "cn.bingoogolapple:bga-adapter:${libs.photopicker_adapter}"
-    compile "cn.bingoogolapple:bga-photopicker:${libs.photopicker}"
+    compile "com.github.lovetuzitong:MultiImageSelector:${libs.image_selector}"
 
+    //九宫格
+    compile "com.jaeger.ninegridimageview:library:${libs.nine_grid_imageview}"
 
+    //二维码
+    compile "cn.yipianfengye.android:zxing-library:${libs.zxing}"
 }

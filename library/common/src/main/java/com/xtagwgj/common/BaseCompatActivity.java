@@ -6,15 +6,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xtagwgj.common.R;
 import com.xtagwgj.common.base.AppManager;
 import com.xtagwgj.common.base.RxManager;
 import com.xtagwgj.common.commonutils.ToastUitl;
-import com.xtagwgj.common.commonwidget.LoadingDialog;
+import com.xtagwgj.common.commonwidget.LoadingDialogUtils;
 import com.xtagwgj.common.commonwidget.StatusBarCompat;
 import com.xtagwgj.common.daynightmodeutils.ChangeModeController;
 
@@ -50,7 +48,7 @@ public abstract class BaseCompatActivity extends RxAppCompatActivity {
     public abstract int getLayoutId();
 
     //初始化view
-    public abstract void initView();
+    public abstract void initView(Bundle savedInstanceState);
 
     //初始化点击事件
     public abstract void initEventListener();
@@ -134,7 +132,7 @@ public abstract class BaseCompatActivity extends RxAppCompatActivity {
      * 开启浮动加载进度条
      */
     public void startProgressDialog() {
-        LoadingDialog.showDialogForLoading(this);
+        LoadingDialogUtils.showDialogForLoading(this);
     }
 
     /**
@@ -143,14 +141,14 @@ public abstract class BaseCompatActivity extends RxAppCompatActivity {
      * @param msg
      */
     public void startProgressDialog(String msg) {
-        LoadingDialog.showDialogForLoading(this, msg, true);
+        LoadingDialogUtils.showDialogForLoading(this, msg, true);
     }
 
     /**
      * 停止浮动加载进度条
      */
     public void stopProgressDialog() {
-        LoadingDialog.cancelDialogForLoading();
+        LoadingDialogUtils.cancelDialogForLoading();
     }
 
     /**

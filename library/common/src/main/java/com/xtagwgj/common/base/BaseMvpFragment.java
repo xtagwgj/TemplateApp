@@ -11,7 +11,7 @@ import com.trello.rxlifecycle.components.RxFragment;
 import com.xtagwgj.common.R;
 import com.xtagwgj.common.commonutils.TUtil;
 import com.xtagwgj.common.commonutils.ToastUitl;
-import com.xtagwgj.common.commonwidget.LoadingDialog;
+import com.xtagwgj.common.commonwidget.LoadingDialogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -127,7 +127,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter, E extends BaseMod
      * 开启加载进度条
      */
     public void startProgressDialog() {
-        LoadingDialog.showDialogForLoading(getActivity());
+        LoadingDialogUtils.showDialogForLoading(getActivity());
     }
 
     /**
@@ -136,14 +136,14 @@ public abstract class BaseMvpFragment<T extends BasePresenter, E extends BaseMod
      * @param msg
      */
     public void startProgressDialog(String msg) {
-        LoadingDialog.showDialogForLoading(getActivity(), msg, true);
+        LoadingDialogUtils.showDialogForLoading(getActivity(), msg, true);
     }
 
     /**
      * 停止加载进度条
      */
     public void stopProgressDialog() {
-        LoadingDialog.cancelDialogForLoading();
+        LoadingDialogUtils.cancelDialogForLoading();
     }
 
 
