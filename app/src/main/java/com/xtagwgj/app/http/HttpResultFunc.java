@@ -1,7 +1,6 @@
 package com.xtagwgj.app.http;
 
-import android.util.Log;
-
+import com.elvishew.xlog.XLog;
 import com.xtagwgj.app.model.RequestResult;
 
 import rx.functions.Func1;
@@ -18,7 +17,7 @@ public class HttpResultFunc<T> implements Func1<RequestResult<T>, T> {
 
     @Override
     public T call(RequestResult<T> tRequestResult) {
-        Log.e(Tag, "call: " + tRequestResult);
+        XLog.e(Tag, "call: " + tRequestResult);
         if (!tRequestResult.isSuccess()) {
             throw new ApiException(tRequestResult.getError_desc());
         }

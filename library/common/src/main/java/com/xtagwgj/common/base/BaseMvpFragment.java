@@ -42,7 +42,7 @@ import butterknife.Unbinder;
 //    public void initView() {
 //    }
 //}
-public abstract class BaseMvpFragment<T extends BasePresenter, E extends BaseModel> extends RxFragment {
+public abstract class BaseMvpFragment<T extends BaseMvpPresenter, E extends BaseMvpModel> extends RxFragment {
     public T mPresenter;
     public E mModel;
     protected View rootView;

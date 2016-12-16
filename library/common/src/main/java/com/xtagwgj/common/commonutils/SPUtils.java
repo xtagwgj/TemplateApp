@@ -2,93 +2,160 @@ package com.xtagwgj.common.commonutils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import com.xtagwgj.common.BaseApplication;
 
 
 /**
  * 对SharedPreference文件中的各种类型的数据进行存取操作
- *
  */
 public class SPUtils {
 
-    private static SharedPreferences sp;
+    private static final String SP_NAME = "wisdom";
 
-    private static void init(Context context) {
-        if (sp == null) {
-            sp = PreferenceManager.getDefaultSharedPreferences(context);
+    private static SPUtils instance = new SPUtils();
+
+    private SPUtils() {
+    }
+
+    private static synchronized void syncInit() {
+        if (instance == null) {
+            instance = new SPUtils();
         }
     }
 
-    public static void setSharedIntData(Context context, String key, int value) {
-        if (sp == null) {
-            init(context);
+    public static SPUtils getInstance() {
+        if (instance == null) {
+            syncInit();
         }
-        sp.edit().putInt(key, value).commit();
+        return instance;
     }
 
-    public static int getSharedIntData(Context context, String key) {
-        if (sp == null) {
-            init(context);
-        }
-        return sp.getInt(key, 0);
+    private android.content.SharedPreferences getSp() {
+        return BaseApplication.getAppContext().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
 
-    public static void setSharedlongData(Context context, String key, long value) {
-        if (sp == null) {
-            init(context);
+    public int getInt(String key, int def) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null)
+                def = sp.getInt(key, def);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        sp.edit().putLong(key, value).commit();
+        return def;
     }
 
-    public static long getSharedlongData(Context context, String key) {
-        if (sp == null) {
-            init(context);
+    public void putInt(String key, int val) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null) {
+                SharedPreferences.Editor e = sp.edit();
+                e.putInt(key, val);
+                e.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return sp.getLong(key, 0l);
     }
 
-    public static void setSharedFloatData(Context context, String key,
-                                          float value) {
-        if (sp == null) {
-            init(context);
+    public long getLong(String key, long def) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null)
+                def = sp.getLong(key, def);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        sp.edit().putFloat(key, value).commit();
+        return def;
     }
 
-    public static Float getSharedFloatData(Context context, String key) {
-        if (sp == null) {
-            init(context);
+    public void putLong(String key, long val) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null) {
+                SharedPreferences.Editor e = sp.edit();
+                e.putLong(key, val);
+                e.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return sp.getFloat(key, 0f);
     }
 
-    public static void setSharedBooleanData(Context context, String key,
-                                            boolean value) {
-        if (sp == null) {
-            init(context);
+
+    public String getString(String key, String def) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null)
+                def = sp.getString(key, def);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        sp.edit().putBoolean(key, value).commit();
+        return def;
     }
 
-    public static Boolean getSharedBooleanData(Context context, String key) {
-        if (sp == null) {
-            init(context);
+    public void putString(String key, String val) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null) {
+                SharedPreferences.Editor e = sp.edit();
+                e.putString(key, val);
+                e.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return sp.getBoolean(key, false);
     }
 
-    public static void setSharedStringData(Context context, String key, String value) {
-        if (sp == null) {
-            init(context);
+    public boolean getBoolean(String key, boolean def) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null)
+                def = sp.getBoolean(key, def);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        sp.edit().putString(key, value).commit();
+        return def;
     }
 
-    public static String getSharedStringData(Context context, String key) {
-        if (sp == null) {
-            init(context);
+    public void putBoolean(String key, boolean val) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null) {
+                SharedPreferences.Editor e = sp.edit();
+                e.putBoolean(key, val);
+                e.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return sp.getString(key, "");
+    }
+
+    public void remove(String key) {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null) {
+                SharedPreferences.Editor e = sp.edit();
+                e.remove(key);
+                e.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clear() {
+        try {
+            android.content.SharedPreferences sp = getSp();
+            if (sp != null) {
+                SharedPreferences.Editor e = sp.edit();
+                e.clear();
+                e.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

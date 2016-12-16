@@ -61,6 +61,7 @@ ext {
             photoview          : "1.2.4",
             retrofit           : "2.1.0",
             okhttp             : "3.3.1",
+            glide_okhttp       : "2.7.2",
             okio               : "1.6.0",
             recovery           : "0.0.8",
             image_selector     : "1.2",

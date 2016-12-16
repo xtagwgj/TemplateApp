@@ -2,7 +2,7 @@ package com.xtagwgj.app.demo;
 
 import com.elvishew.xlog.XLog;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xtagwgj.app.demo.api.ApiUser;
+import com.xtagwgj.app.demo.api.ApiDemo;
 import com.xtagwgj.app.demo.model.AdvertisementResponse;
 import com.xtagwgj.app.demo.model.FileResponse;
 import com.xtagwgj.app.model.LoginInfoResponse;
@@ -23,7 +23,7 @@ public class DemoPresenter implements DemoContract.Presenter {
 
     private DemoContract.View mView;
     private RxAppCompatActivity context;
-    private ApiUser apiUser;
+    private ApiDemo apiDemo;
 
     DemoPresenter(RxAppCompatActivity context, String title, DemoContract.View mView) {
         this.context = context;
@@ -43,7 +43,7 @@ public class DemoPresenter implements DemoContract.Presenter {
     @Override
     public void login(String username, String password) {
 
-        apiUser.login(username, password,
+        apiDemo.login(username, password,
                 new ProgressSubscriber<List<LoginInfoResponse>>(new HttpOnNextListener<List<LoginInfoResponse>>() {
                     @Override
                     public void onNext(List<LoginInfoResponse> o) {
@@ -68,7 +68,7 @@ public class DemoPresenter implements DemoContract.Presenter {
      */
     @Override
     public void getAd(String code, int type) {
-        apiUser.getAd(context, code, type, new Subscriber<List<AdvertisementResponse>>() {
+        apiDemo.getAd(context, code, type, new Subscriber<List<AdvertisementResponse>>() {
             @Override
             public void onCompleted() {
 
@@ -88,7 +88,7 @@ public class DemoPresenter implements DemoContract.Presenter {
 
     @Override
     public void uploadPic(String file) {
-        apiUser.uploadPic(context, file, new Subscriber<List<FileResponse>>() {
+        apiDemo.uploadPic(context, file, new Subscriber<List<FileResponse>>() {
             @Override
             public void onCompleted() {
 
@@ -110,12 +110,12 @@ public class DemoPresenter implements DemoContract.Presenter {
 
     @Override
     public void subscribe() {
-        if (apiUser == null)
-            apiUser = new ApiUser();
+        if (apiDemo == null)
+            apiDemo = new ApiDemo();
     }
 
     @Override
     public void unSubscribe() {
-        apiUser = null;
+        apiDemo = null;
     }
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.xtagwgj.app.R;
+import com.xtagwgj.common.base.AppManager;
 import com.xtagwgj.common.base.BaseActivity;
 import com.xtagwgj.common.commonutils.AppUtils;
 import com.xtagwgj.common.commonutils.SPUtils;
@@ -26,11 +27,12 @@ public class GuideActivity extends BaseActivity {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
-    public static void startAction(Activity activity){
+    public static void startAction(Activity activity) {
         Intent intent = new Intent(activity, GuideActivity.class);
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.fade_in,
                 R.anim.fade_out);
+        AppManager.getAppManager().finishActivity(activity);
     }
 
     @Override
@@ -55,7 +57,7 @@ public class GuideActivity extends BaseActivity {
         viewPager.setAdapter(adapter);
 
         adapter.getView(INDICATOR_IDS.length - 1).setOnClickListener(v -> {
-            SPUtils.setSharedIntData(this,"versionCode", AppUtils.getLocalVersion(GuideActivity.this));
+            SPUtils.getInstance().putInt( "versionCode", AppUtils.getAppVersionCode(GuideActivity.this));
             MainActivity.startAction(GuideActivity.this);
         });
     }

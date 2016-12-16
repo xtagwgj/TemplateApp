@@ -32,7 +32,7 @@ import butterknife.Unbinder;
 //    public void initView() {
 //    }
 //}
-public abstract class BaseMvpActivity<T extends BasePresenter, E extends BaseModel> extends BaseCompatActivity {
+public abstract class BaseMvpActivity<T extends BaseMvpPresenter, E extends BaseMvpModel> extends BaseCompatActivity {
     public T mPresenter;
     public E mModel;
     private Unbinder bind;
@@ -50,6 +50,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter, E extends BaseMod
         if (mPresenter != null) {
             mPresenter.mContext = this;
         }
+
         this.initPresenter();
         this.initView(savedInstanceState);
         this.initEventListener();
@@ -57,7 +58,6 @@ public abstract class BaseMvpActivity<T extends BasePresenter, E extends BaseMod
 
     //简单页面无需mvp就不用管此方法即可,完美兼容各种实际场景的变通
     public abstract void initPresenter();
-
 
     @Override
     protected void onDestroy() {

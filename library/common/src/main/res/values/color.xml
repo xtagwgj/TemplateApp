@@ -10,8 +10,8 @@
     <!--<color name="colorPrimaryDark">#FA7C20</color>-->
     <!--<color name="colorAccent">#FA7C20</color>-->
 
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#2672ac</color>
+    <color name="colorPrimaryDark">#2672ac</color>
     <color name="colorAccent">#FF4081</color>
     <!--白天主题-->
     <color name="day_backgroup_color">#FFFFFFFF</color>
@@ -24,7 +24,7 @@
     <color name="night_two_text_color">#8A9599</color>
     <color name="night_there_text_color">#8A9599</color>
     <!-- app主色调-->
-    <color name="main_color">#3F51B5</color>
+    <color name="main_color">#2672ac</color>
     <color name="orange">#FA8C20</color>
 
     <color name="gray">#FFF0F0F0</color>

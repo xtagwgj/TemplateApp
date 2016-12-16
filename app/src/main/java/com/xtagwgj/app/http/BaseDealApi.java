@@ -3,6 +3,7 @@ package com.xtagwgj.app.http;
 import com.trello.rxlifecycle.components.RxFragment;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xtagwgj.app.model.RequestResult;
+import com.xtagwgj.common.base.BaseMvpModel;
 import com.xtagwgj.retrofitutils.http.api.DealBaseApi;
 import com.xtagwgj.retrofitutils.http.exception.RetryWhenNetworkException;
 
@@ -14,7 +15,7 @@ import rx.Subscriber;
  * Created by xtagwgj on 2016/12/13.
  */
 
-public class BaseDealApi extends DealBaseApi {
+public class BaseDealApi extends DealBaseApi implements BaseMvpModel{
     /**
      * 在activity的生命周期内处理返回的数据
      */

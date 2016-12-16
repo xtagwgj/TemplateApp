@@ -29,7 +29,7 @@ import rx.functions.Action1;
 
 public class DemoFragment extends BaseFragment implements DemoContract.View, EasyPermissions.PermissionCallbacks {
     public static final String Arguement_task = "task";
-    private static int PERMISSION_UPLOAD_FILE=123;
+    private static int PERMISSION_UPLOAD_FILE = 123;
 
     private DemoContract.Presenter mPresenter;
 

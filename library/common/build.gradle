@@ -58,6 +58,7 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:${libs.butterknief}"
 
     compile "com.android.support:multidex:${libs.multidex}"//分包
+    compile "com.squareup.okhttp:okhttp:${libs.glide_okhttp}"
     compile "com.github.bumptech.glide:glide:${libs.glide}"//显示图片框架
     compile "com.commit451:PhotoView:${libs.photoview}"//图片缩放
 

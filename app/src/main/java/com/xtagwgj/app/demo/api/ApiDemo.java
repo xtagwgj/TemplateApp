@@ -26,11 +26,11 @@ import rx.Subscriber;
  * Created by xtagwgj on 16/9/25.
  */
 
-public class ApiUser extends BaseDealApi {
+public class ApiDemo extends BaseDealApi {
 
     private ApiStore apiStore;
 
-    public ApiUser() {
+    public ApiDemo() {
         apiStore = create(ApiStore.class);
     }
 

@@ -1,6 +1,5 @@
 package com.xtagwgj.common;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -23,6 +22,7 @@ import com.xtagwgj.common.daynightmodeutils.ChangeModeController;
 public abstract class BaseCompatActivity extends RxAppCompatActivity {
     public Context mContext;
     public RxManager mRxManager;
+
 
     /**
      * 设置layout前配置
@@ -128,6 +128,16 @@ public abstract class BaseCompatActivity extends RxAppCompatActivity {
 
     }
 
+    public void finishActivityNoAnim(Class<?> cls) {
+        AppManager.getAppManager().finishActivity(cls);
+    }
+
+    public void finishActivity(Class<?> cls) {
+        AppManager.getAppManager().finishActivity(cls);
+        overridePendingTransition(R.anim.in_from_left,
+                R.anim.out_to_right);
+    }
+
     /**
      * 开启浮动加载进度条
      */
@@ -209,6 +219,5 @@ public abstract class BaseCompatActivity extends RxAppCompatActivity {
     protected void onPause() {
         super.onPause();
     }
-
 
 }

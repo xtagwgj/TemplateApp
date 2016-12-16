@@ -7,7 +7,7 @@ import android.content.Context;
  * Created by xsf
  * on 2016.07.11:55
  */
-public abstract class BasePresenter<T,E>{
+public abstract class BaseMvpPresenter<T,E>{
     public Context mContext;
     public E mModel;
     public T mView;

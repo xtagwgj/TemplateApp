@@ -121,6 +121,7 @@ dependencies {
     compile "com.tencent.bugly:crashreport:${libs.bugly}"
 
 
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 }
 
 def releaseTime() {

@@ -103,6 +103,16 @@ public enum ApiRequest {
         if (showLog)
             httpClientBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
 
+        /**
+         *支持https传输
+         */
+
+        //certificates 是你raw下证书源ID, int[] certificates = {R.raw.myssl}
+//        httpClientBuilder.socketFactory(HttpsFactroy.getSSLSocketFactory(BaseApplication.getAppContext(), certificates));
+
+        //hosts是你的host数据 列如 String hosts[]`= {“https//:aaaa,com”, “https//:bbb.com”}
+//        httpClientBuilder.hostnameVerifier(HttpsFactroy.getHostnameVerifier(hosts));
+
         return httpClientBuilder;
     }
 

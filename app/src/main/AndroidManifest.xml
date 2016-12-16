@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
+        <meta-data
+            android:name="com.xtagwgj.common.glide_okhttp_integration.CustomGlideModule"
+            android:value="GlideModule" />
+
         <activity
             android:name=".ui.main.SplashActivity"
             android:launchMode="singleTask">
@@ -35,6 +39,10 @@
             android:configChanges="orientation|screenSize" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.main.GuideActivity" />
+        <activity
+            android:name=".ui.user.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.user.ForgetPasswordActivity"></activity>
     </application>
 
 </manifest>
