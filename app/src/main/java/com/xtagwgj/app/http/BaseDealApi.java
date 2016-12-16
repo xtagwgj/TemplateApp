@@ -2,7 +2,7 @@ package com.xtagwgj.app.http;
 
 import com.trello.rxlifecycle.components.RxFragment;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xtagwgj.app.model.RequestResult;
+import com.xtagwgj.app.domain.RequestResult;
 import com.xtagwgj.common.base.BaseMvpModel;
 import com.xtagwgj.retrofitutils.http.api.DealBaseApi;
 import com.xtagwgj.retrofitutils.http.exception.RetryWhenNetworkException;

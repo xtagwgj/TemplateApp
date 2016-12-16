@@ -15,20 +15,6 @@ import java.util.regex.Pattern;
  * 格式化验证
  */
 public class FormatUtil {
-    /**
-     * 验证手机格式
-     */
-    public static boolean isMobile(String mobiles) {
-		/*
-	    移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188、178
-	    联通：130、131、132、152、155、156、185、186、176
-	    电信：133、153、180、189、（1349卫通）、177
-	    总结起来就是第一位必定为1，第二位必定为3或5或8或7，其他位置的可以为0-9
-		 */
-        String telRegex = "[1][34578]\\d{9}";//"[1]"代表第1位为数字1，"[3458]"代表第二位可以为3、4、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        if (TextUtils.isEmpty(mobiles)) return false;
-        else return mobiles.matches(telRegex);
-    }
 
     /**
      * 判断是否全是数字
@@ -76,25 +62,7 @@ public class FormatUtil {
         return false;
     }
 
-    /**
-     * 检测String是否全是中文
-     * @param name
-     * @return
-     */
-    public  static boolean checkNameChese(String name)
-    {
-        boolean res=true;
-        char [] cTemp = name.toCharArray();
-        for(int i=0;i<name.length();i++)
-        {
-            if(!isChinese(cTemp[i]))
-            {
-                res=false;
-                break;
-            }
-        }
-        return res;
-    }
+
 
     /**
      * 判断是否是银行卡号
@@ -159,7 +127,7 @@ public class FormatUtil {
         } else if (IDStr.length() == 15) {
             Ai = IDStr.substring(0, 6) + "19" + IDStr.substring(6, 15);
         }
-        if (isNumeric(Ai) == false) {
+        if (!isNumeric(Ai)) {
             errorInfo = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。";
             Log.e("FormatUtil","ID:"+"errorInfo="+errorInfo);
             return false;

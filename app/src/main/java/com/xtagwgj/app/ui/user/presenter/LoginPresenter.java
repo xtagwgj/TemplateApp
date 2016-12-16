@@ -1,7 +1,7 @@
 package com.xtagwgj.app.ui.user.presenter;
 
 import com.elvishew.xlog.XLog;
-import com.xtagwgj.app.model.LoginInfoResponse;
+import com.xtagwgj.app.domain.LoginInfoResponse;
 import com.xtagwgj.app.ui.user.contract.LoginContract;
 import com.xtagwgj.common.commonutils.RegexUtils;
 import com.xtagwgj.retrofitutils.http.factory.ProgressSubscriber;

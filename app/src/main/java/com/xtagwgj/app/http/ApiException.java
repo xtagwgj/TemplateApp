@@ -6,8 +6,13 @@ package com.xtagwgj.app.http;
  */
 
 public class ApiException extends RuntimeException {
-    public static final int USER_NOT_EXIST = 100;
-    public static final int WRONG_PASSWORD = 101;
+     static final int Error_400 = 400;
+     static final int Error_404 = 404;
+     static final int Error_408 = 408;
+     static final int Error_500 = 500;
+
+    static final int USER_NOT_EXIST = 100;
+    static final int WRONG_PASSWORD = 101;
 
     public ApiException(int resultCode) {
         this(getApiExceptionMessage(resultCode));
@@ -26,8 +31,21 @@ public class ApiException extends RuntimeException {
      * @return
      */
     private static String getApiExceptionMessage(int code) {
-        String message = "";
+        String message ;
         switch (code) {
+            case Error_400:
+                message = "错误请求";
+                break;
+            case Error_404:
+                message = "服务器找不到请求的网页";
+                break;
+            case Error_408:
+                message = "服务器等候请求时发生超时";
+                break;
+            case Error_500:
+                message = "服务器遇到错误，无法完成请求";
+                break;
+
             case USER_NOT_EXIST:
                 message = "该用户不存在";
                 break;
@@ -38,6 +56,6 @@ public class ApiException extends RuntimeException {
                 message = "未知错误";
 
         }
-        return "";
+        return message;
     }
 }

@@ -8,9 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trello.rxlifecycle.components.RxFragment;
-import com.xtagwgj.common.R;
 import com.xtagwgj.common.commonutils.TUtil;
-import com.xtagwgj.common.commonutils.ToastUitl;
+import com.xtagwgj.common.commonutils.ToastUtils;
 import com.xtagwgj.common.commonwidget.LoadingDialogUtils;
 
 import butterknife.ButterKnife;
@@ -151,44 +150,28 @@ public abstract class BaseMvpFragment<T extends BaseMvpPresenter, E extends Base
      * 短暂显示Toast提示(来自String)
      **/
     public void showShortToast(String text) {
-        ToastUitl.showShort(text);
+        ToastUtils.showShortToastSafe(getActivity(), text);
     }
 
     /**
      * 短暂显示Toast提示(id)
      **/
     public void showShortToast(int resId) {
-        ToastUitl.showShort(resId);
+        ToastUtils.showShortToastSafe(getActivity(), resId);
     }
 
     /**
      * 长时间显示Toast提示(来自res)
      **/
     public void showLongToast(int resId) {
-        ToastUitl.showLong(resId);
+        ToastUtils.showLongToastSafe(getActivity(), resId);
     }
 
     /**
      * 长时间显示Toast提示(来自String)
      **/
     public void showLongToast(String text) {
-        ToastUitl.showLong(text);
-    }
-
-
-    public void showToastWithImg(String text, int res) {
-        ToastUitl.showToastWithImg(text, res);
-    }
-
-    /**
-     * 网络访问错误提醒
-     */
-    public void showNetErrorTip() {
-        ToastUitl.showToastWithImg(getText(R.string.net_error).toString(), R.mipmap.ic_wifi_off);
-    }
-
-    public void showNetErrorTip(String error) {
-        ToastUitl.showToastWithImg(error, R.mipmap.ic_wifi_off);
+        ToastUtils.showLongToastSafe(getActivity(), text);
     }
 
 

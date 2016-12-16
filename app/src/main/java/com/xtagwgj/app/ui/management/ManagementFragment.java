@@ -4,6 +4,7 @@ import com.xtagwgj.app.R;
 import com.xtagwgj.common.base.BaseFragment;
 
 /**
+ * 管理
  * Created by xtagwgj on 2016/12/14.
  */
 

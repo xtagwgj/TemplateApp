@@ -18,6 +18,7 @@
 
 #实体类
 -keep class com.wisdomcommunity.android.ui.model.** {*;}
+-keep class com.xtagwgj.app.domain.** {*;}
 
 #butterknife
 -keep class butterknife.** { *; }
@@ -44,6 +45,17 @@
   public *;
 }
 
+#jpush
+-dontoptimize
+-dontpreverify
+
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+
 #okhttputils
 -dontwarn com.zhy.http.**
 -keep class com.zhy.http.**{*;}
@@ -55,6 +67,7 @@
 -keep interface okhttp3.**{*;}
 -keep class com.bumptech.glide.integration.okhttp3.OkHttpGlideModule
 -keep public class * implements com.bumptech.glide.module.GlideModule
+
 
 -dontwarn com.franmontiel.persistentcookiejar.**
 -keep class com.franmontiel.persistentcookiejar.**
@@ -111,6 +124,32 @@
 -keep class com.aliyun.api.**{* ;}
 -dontwarn com.aliyun.api.**
 
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+#-keepattributes Signature-keepattributes Exceptions
+
+# Gson
+-keep class com.google.gson.stream.** { *; }
+-keepattributes EnclosingMethod
+
+# RxJava RxAndroid
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# For retrolambda
+-dontwarn java.lang.invoke.*
+
+-dontwarn com.squareup.okhttp.*
 
 #eventbus
 -keepattributes *Annotation*

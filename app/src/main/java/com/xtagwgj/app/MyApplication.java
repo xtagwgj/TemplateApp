@@ -9,6 +9,8 @@ import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.loadinglayout.LoadingLayout;
 import com.xtagwgj.retrofitutils.http.ApiRequest;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by xtagwgj on 2016/12/10.
  */
@@ -19,14 +21,17 @@ public class MyApplication extends BaseApplication {
         super.onCreate();
 
         initNet();
+        initPush();
         initLoadingLayout();
         initLogger();
     }
 
+    private void initPush() {
+        JPushInterface.setDebugMode(BuildConfig.DEBUG);
+        JPushInterface.init(this);
+    }
+
     private void initNet() {
-        /**
-         *
-         */
         ApiRequest.instance.initRetrofit("http://iyuns.ylxmall.com:8080/property/", true);
     }
 

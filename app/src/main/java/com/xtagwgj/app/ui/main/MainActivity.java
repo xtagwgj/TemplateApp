@@ -12,7 +12,7 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.xtagwgj.app.R;
 import com.xtagwgj.app.base.Constant;
-import com.xtagwgj.app.model.TabEntity;
+import com.xtagwgj.app.domain.TabEntity;
 import com.xtagwgj.app.ui.board.BoardFragment;
 import com.xtagwgj.app.ui.maintain.MaintainFragment;
 import com.xtagwgj.app.ui.management.ManagementFragment;

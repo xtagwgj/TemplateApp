@@ -2,8 +2,8 @@ package com.xtagwgj.app.ui.user.model;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xtagwgj.app.http.BaseDealApi;
-import com.xtagwgj.app.model.LoginInfoResponse;
-import com.xtagwgj.app.model.RequestResult;
+import com.xtagwgj.app.domain.LoginInfoResponse;
+import com.xtagwgj.app.domain.RequestResult;
 
 import java.util.List;
 
@@ -48,10 +48,10 @@ public class UserModel extends BaseDealApi {
     /**
      * 获取验证码
      *
-     * @param activity
+     * @param activity   绑定周期的activity
      * @param phone      手机号
      * @param type       短信验证码类型
-     * @param subscriber
+     * @param subscriber 订阅的验证码处理
      */
 
     public void getVerifyCode(RxAppCompatActivity activity, String phone, int type, Subscriber<List<String>> subscriber) {

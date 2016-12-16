@@ -1,4 +1,4 @@
-package com.xtagwgj.app.model;
+package com.xtagwgj.app.domain;
 
 import com.google.gson.annotations.SerializedName;
 

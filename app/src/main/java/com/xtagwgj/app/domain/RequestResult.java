@@ -1,4 +1,4 @@
-package com.xtagwgj.app.model;
+package com.xtagwgj.app.domain;
 
 /**
  * 网络请求返回对象公共抽象类

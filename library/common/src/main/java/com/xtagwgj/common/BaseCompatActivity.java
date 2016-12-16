@@ -10,7 +10,7 @@ import android.view.Window;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xtagwgj.common.base.AppManager;
 import com.xtagwgj.common.base.RxManager;
-import com.xtagwgj.common.commonutils.ToastUitl;
+import com.xtagwgj.common.commonutils.ToastUtils;
 import com.xtagwgj.common.commonwidget.LoadingDialogUtils;
 import com.xtagwgj.common.commonwidget.StatusBarCompat;
 import com.xtagwgj.common.daynightmodeutils.ChangeModeController;
@@ -165,50 +165,50 @@ public abstract class BaseCompatActivity extends RxAppCompatActivity {
      * 短暂显示Toast提示(来自String)
      **/
     public void showShortToast(String text) {
-        ToastUitl.showShort(text);
+        ToastUtils.showShortToastSafe(this, text);
     }
 
     /**
      * 短暂显示Toast提示(id)
      **/
     public void showShortToast(int resId) {
-        ToastUitl.showShort(resId);
+        ToastUtils.showShortToastSafe(this, resId);
     }
 
     /**
      * 长时间显示Toast提示(来自res)
      **/
     public void showLongToast(int resId) {
-        ToastUitl.showLong(resId);
+        ToastUtils.showLongToastSafe(this, resId);
     }
 
     /**
      * 长时间显示Toast提示(来自String)
      **/
     public void showLongToast(String text) {
-        ToastUitl.showLong(text);
+        ToastUtils.showLongToastSafe(this, text);
     }
 
-    /**
-     * 带图片的toast
-     *
-     * @param text
-     * @param res
-     */
-    public void showToastWithImg(String text, int res) {
-        ToastUitl.showToastWithImg(text, res);
-    }
-
-    /**
-     * 网络访问错误提醒
-     */
-    public void showNetErrorTip() {
-        ToastUitl.showToastWithImg(getText(R.string.net_error).toString(), R.mipmap.ic_wifi_off);
-    }
-
-    public void showNetErrorTip(String error) {
-        ToastUitl.showToastWithImg(error, R.mipmap.ic_wifi_off);
-    }
+//    /**
+//     * 带图片的toast
+//     *
+//     * @param text
+//     * @param res
+//     */
+//    public void showToastWithImg(String text, int res) {
+//        ToastUitl.showToastWithImg(text, res);
+//    }
+//
+//    /**
+//     * 网络访问错误提醒
+//     */
+//    public void showNetErrorTip() {
+//        ToastUitl.showToastWithImg(getText(R.string.net_error).toString(), R.mipmap.ic_wifi_off);
+//    }
+//
+//    public void showNetErrorTip(String error) {
+//        ToastUitl.showToastWithImg(error, R.mipmap.ic_wifi_off);
+//    }
 
     @Override
     protected void onResume() {

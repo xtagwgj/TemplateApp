@@ -4,8 +4,8 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xtagwgj.app.http.BaseDealApi;
 import com.xtagwgj.app.demo.model.AdvertisementResponse;
 import com.xtagwgj.app.demo.model.FileResponse;
-import com.xtagwgj.app.model.LoginInfoResponse;
-import com.xtagwgj.app.model.RequestResult;
+import com.xtagwgj.app.domain.LoginInfoResponse;
+import com.xtagwgj.app.domain.RequestResult;
 
 import java.io.File;
 import java.util.List;

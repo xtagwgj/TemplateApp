@@ -3,7 +3,6 @@ package com.xtagwgj.app.ui.user;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,8 +12,8 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.xtagwgj.app.R;
 import com.xtagwgj.app.base.Constant;
 import com.xtagwgj.app.ui.main.MainActivity;
-import com.xtagwgj.app.ui.user.model.UserModel;
 import com.xtagwgj.app.ui.user.contract.LoginContract;
+import com.xtagwgj.app.ui.user.model.UserModel;
 import com.xtagwgj.app.ui.user.presenter.LoginPresenter;
 import com.xtagwgj.common.base.AppManager;
 import com.xtagwgj.common.base.BaseMvpActivity;
@@ -61,7 +60,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter, UserModel> im
     @Override
     public void initView(Bundle savedInstanceState) {
         //强制页面全屏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     }
 

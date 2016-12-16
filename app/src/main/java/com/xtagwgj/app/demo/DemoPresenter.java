@@ -5,7 +5,7 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xtagwgj.app.demo.api.ApiDemo;
 import com.xtagwgj.app.demo.model.AdvertisementResponse;
 import com.xtagwgj.app.demo.model.FileResponse;
-import com.xtagwgj.app.model.LoginInfoResponse;
+import com.xtagwgj.app.domain.LoginInfoResponse;
 import com.xtagwgj.common.commonutils.ToastUtils;
 import com.xtagwgj.retrofitutils.http.ApiRequest;
 import com.xtagwgj.retrofitutils.http.factory.ProgressSubscriber;

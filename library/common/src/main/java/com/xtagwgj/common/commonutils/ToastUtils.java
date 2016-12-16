@@ -3,8 +3,19 @@ package com.xtagwgj.common.commonutils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.xtagwgj.common.BaseApplication;
+import com.xtagwgj.common.R;
+
 /**
+ * Toast统一管理类
  * Created by xtagwgj on 2016/12/10.
  */
 
@@ -15,6 +26,7 @@ public class ToastUtils {
     }
 
     private static Toast sToast;
+    private static Toast toast2;
     private static Handler sHandler = new Handler(Looper.getMainLooper());
     private static boolean isJumpWhenMore;
 
@@ -288,6 +300,34 @@ public class ToastUtils {
      */
     private static void showToast(Context context, String format, int duration, Object... args) {
         showToast(context, String.format(format, args), duration);
+    }
+
+    /**
+     * 显示有image的toast
+     *
+     * @param tvStr
+     * @param imageResource
+     * @return
+     */
+    public static Toast showToastWithImg(final String tvStr, final int imageResource) {
+        if (toast2 == null) {
+            toast2 = new Toast(BaseApplication.getAppContext());
+        }
+        View view = LayoutInflater.from(BaseApplication.getAppContext()).inflate(R.layout.toast_custom, null);
+        TextView tv = (TextView) view.findViewById(R.id.toast_custom_tv);
+        tv.setText(TextUtils.isEmpty(tvStr) ? "" : tvStr);
+        ImageView iv = (ImageView) view.findViewById(R.id.toast_custom_iv);
+        if (imageResource > 0) {
+            iv.setVisibility(View.VISIBLE);
+            iv.setImageResource(imageResource);
+        } else {
+            iv.setVisibility(View.GONE);
+        }
+        toast2.setView(view);
+        toast2.setGravity(Gravity.CENTER, 0, 0);
+        toast2.show();
+        return toast2;
+
     }
 
     /**
