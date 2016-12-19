@@ -4,6 +4,7 @@ package com.xtagwgj.common.base;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.Stack;
 
@@ -40,6 +41,7 @@ public class AppManager {
         if (activityStack == null) {
             activityStack = new Stack<Activity>();
         }
+        Log.e("添加指定的Activity",activity.getLocalClassName());
         activityStack.add(activity);
     }
 
@@ -80,7 +82,9 @@ public class AppManager {
      * 结束指定的Activity
      */
     public void finishActivity(Activity activity) {
+
         if (activity != null) {
+            Log.e("结束指定的Activity",activity.getLocalClassName());
             activityStack.remove(activity);
             activity.finish();
             activity = null;

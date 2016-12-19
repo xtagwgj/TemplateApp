@@ -20,7 +20,7 @@
         tl:tl_iconWidth="20dp"
         tl:tl_indicator_color="@color/gray"
         tl:tl_indicator_height="0dp"
-        tl:tl_textSelectColor="#FA7C20"
+        tl:tl_textSelectColor="@color/colorLoginBackground"
         tl:tl_textUnselectColor="#808080"
         tl:tl_textsize="11sp"
         tl:tl_underline_height="0dp" />

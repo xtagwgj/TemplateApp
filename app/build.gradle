@@ -104,7 +104,6 @@ dependencies {
 
     //导入的android的系统包
 //    compile "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}"
-    testCompile 'junit:junit:4.12'
 
     //导入的jar包中的文件
     compile project(path: ':library:common')
@@ -131,13 +130,16 @@ dependencies {
     //日志
     compile "com.elvishew:xlog:${libs.xlog}"
 
-    //
+    //Bugly
     compile "com.tencent.bugly:crashreport:${libs.bugly}"
 
-    //
-    compile "cn.jiguang.sdk:jpush:${libs.jpush}" // 此处以JPush 3.0.0 版本为例。
-    compile "cn.jiguang.sdk:jcore:${libs.jcore}" // 此处以JCore 1.0.0 版本为例。
+    //此处以JPush 3.0.0 版本为例。
+    compile "cn.jiguang.sdk:jpush:${libs.jpush}"
+    // 此处以JCore 1.0.0 版本为例。
+    compile "cn.jiguang.sdk:jcore:${libs.jcore}"
 
+
+    testCompile 'junit:junit:4.12'
 }
 
 def releaseTime() {

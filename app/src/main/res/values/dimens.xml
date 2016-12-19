@@ -3,11 +3,33 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="button_height">@dimen/height_48</dimen>
+
+    <!--单行列表 带有文本的图标-->
+    <dimen name="height_48">48dp</dimen>
+    <!--带有文本的头像-->
+    <dimen name="height_56">56dp</dimen>
+    <!--两行列表 带有文本和图标的头像-->
+    <dimen name="height_72">72dp</dimen>
+    <!--三行列表-->
+    <dimen name="height_88">88dp</dimen>
+
+    <!--图标间距-->
+    <dimen name="ico_margin">24dp</dimen>
+    <!--头像间距-->
+    <dimen name="headIco_margin">40dp</dimen>
+
+    <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_20">20dp</dimen>
-    <dimen name="button_height">48dp</dimen>
+    <dimen name="padding_72">72dp</dimen>
 
-    <dimen name="view_big">48dp</dimen>
-    <dimen name="view_normal">48dp</dimen>
+    <!--字体大小-->
+    <dimen name="font_size_button">16sp</dimen>
 
-    <dimen name="button_text">16sp</dimen>
+    <dimen name="font_size_34">34sp</dimen>
+    <dimen name="font_size_20">20sp</dimen>
+    <dimen name="font_size_main">16sp</dimen>
+    <dimen name="font_size_minor">14sp</dimen>
+    <dimen name="font_size_small">12sp</dimen>
+
 </resources>

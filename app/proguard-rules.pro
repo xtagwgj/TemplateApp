@@ -33,6 +33,14 @@
     @butterknife.* <methods>;
 }
 
+#Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+#baidu
 -keep class com.baidu.** { *; }
 -keep class vi.com.** {*;}
 -dontwarn com.baidu.**
@@ -61,6 +69,12 @@
 -keep class com.zhy.http.**{*;}
 -keep interface com.zhy.http.**{*;}
 
+#okio
+-dontwarn okio.**
+-keep class okio.**{*;}
+-keep interface okio.**{*;}
+
+
 #okhttp
 -dontwarn okhttp3.**
 -keep class okhttp3.**{*;}
@@ -82,10 +96,6 @@
     java.lang.Object readResolve();
 }
 
-#okio
--dontwarn okio.**
--keep class okio.**{*;}
--keep interface okio.**{*;}
 
 #Gson
 -keepattributes Signature
@@ -254,14 +264,16 @@
   public static final android.os.Parcelable$Creator *;
 }
 
--optimizationpasses 5
--dontusemixedcaseclassnames
+
+-optimizationpasses 5 # 指定代码的压缩级别
+-dontusemixedcaseclassnames # 是否使用大小写混合
+-dontpreverify # 混淆时是否做预校验
+-verbose # 混淆时是否记录日志
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/* # 混淆时所采用的算法
+
 -dontskipnonpubliclibraryclasses
 -dontskipnonpubliclibraryclassmembers
--dontpreverify
--verbose
 -printmapping proguardMapping.txt
--optimizations !code/simplification/cast,!field/*,!class/merging/*
 -keepattributes *Annotation*,InnerClasses
 -keepattributes Signature
 -keepattributes SourceFile,LineNumberTable

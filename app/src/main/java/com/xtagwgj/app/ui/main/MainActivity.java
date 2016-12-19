@@ -40,11 +40,11 @@ public class MainActivity extends BaseActivity {
     @BindArray(R.array.navi_bottom_name)
     String[] mTitles;
 
-    //    private String[] mTitles = {"维修", "公告", "管理", "我的"};
+    //    private String[] mTitles = {"维修", "管理","公告",  "我的"};
     private int[] mIconUnselectIds = {
-            R.mipmap.ic_home_normal, R.mipmap.ic_girl_normal, R.mipmap.ic_video_normal, R.mipmap.ic_care_normal};
+            R.mipmap.nav_maintain_unselected, R.mipmap.nav_management_unselected, R.mipmap.nav_board_unselected, R.mipmap.nav_me_unselected};
     private int[] mIconSelectIds = {
-            R.mipmap.ic_home_selected, R.mipmap.ic_girl_selected, R.mipmap.ic_video_selected, R.mipmap.ic_care_selected};
+            R.mipmap.nav_maintain_selected, R.mipmap.nav_management_selected, R.mipmap.nav_board_selected, R.mipmap.nav_me_selected};
 
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
@@ -117,19 +117,19 @@ public class MainActivity extends BaseActivity {
         int currentTabPosition = 0;
         if (savedInstanceState != null) {
             maintainFragment = (MaintainFragment) getFragmentManager().findFragmentByTag("maintainFragment");
-            boardFragment = (BoardFragment) getFragmentManager().findFragmentByTag("boardFragment");
             managementFragment = (ManagementFragment) getFragmentManager().findFragmentByTag("maintainFragment");
+            boardFragment = (BoardFragment) getFragmentManager().findFragmentByTag("boardFragment");
             meFragment = (MeFragment) getFragmentManager().findFragmentByTag("meFragment");
             currentTabPosition = savedInstanceState.getInt(Constant.HOME_CURRENT_TAB_POSITION);
         } else {
             maintainFragment = new MaintainFragment();
-            boardFragment = new BoardFragment();
             managementFragment = new ManagementFragment();
+            boardFragment = new BoardFragment();
             meFragment = new MeFragment();
 
             transaction.add(R.id.fl_body, maintainFragment, "maintainFragment");
-            transaction.add(R.id.fl_body, boardFragment, "boardFragment");
             transaction.add(R.id.fl_body, managementFragment, "managementFragment");
+            transaction.add(R.id.fl_body, boardFragment, "boardFragment");
             transaction.add(R.id.fl_body, meFragment, "meFragment");
         }
         transaction.commit();
@@ -151,16 +151,15 @@ public class MainActivity extends BaseActivity {
         switch (position) {
             //维修
             case 0:
-
                 transaction.show(maintainFragment);
                 break;
-            //公告
-            case 1:
-                transaction.show(boardFragment);
-                break;
             //管理
-            case 2:
+            case 1:
                 transaction.show(managementFragment);
+                break;
+            //公告
+            case 2:
+                transaction.show(boardFragment);
                 break;
             //我的
             case 3:

@@ -1,6 +1,7 @@
 package com.xtagwgj.app.base;
 
 /**
+ * 不变量
  * Created by xtagwgj on 2016/12/14.
  */
 

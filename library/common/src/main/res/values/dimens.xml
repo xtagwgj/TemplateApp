@@ -11,4 +11,38 @@
     <dimen name="gudieview_heigh">6dp</dimen>
     <dimen name="gudieview_width">6dp</dimen>
 
+
+
+    <!--&lt;!&ndash;通用&ndash;&gt;-->
+
+
+    <!--<dimen name="button_height">@dimen/height_48</dimen>-->
+
+    <!--&lt;!&ndash;单行列表 带有文本的图标&ndash;&gt;-->
+    <!--<dimen name="height_48">48dp</dimen>-->
+    <!--&lt;!&ndash;带有文本的头像&ndash;&gt;-->
+    <!--<dimen name="height_56">56dp</dimen>-->
+    <!--&lt;!&ndash;两行列表 带有文本和图标的头像&ndash;&gt;-->
+    <!--<dimen name="height_72">72dp</dimen>-->
+    <!--&lt;!&ndash;三行列表&ndash;&gt;-->
+    <!--<dimen name="height_88">88dp</dimen>-->
+
+    <!--&lt;!&ndash;图标间距&ndash;&gt;-->
+    <!--<dimen name="ico_margin">24dp</dimen>-->
+    <!--&lt;!&ndash;头像间距&ndash;&gt;-->
+    <!--<dimen name="headIco_margin">40dp</dimen>-->
+
+    <!--<dimen name="padding_16">16dp</dimen>-->
+    <!--<dimen name="padding_20">20dp</dimen>-->
+    <!--<dimen name="padding_72">72dp</dimen>-->
+
+    <!--&lt;!&ndash;字体大小&ndash;&gt;-->
+    <!--<dimen name="font_size_button">16sp</dimen>-->
+
+    <!--<dimen name="font_size_34">34sp</dimen>-->
+    <!--<dimen name="font_size_20">20sp</dimen>-->
+    <!--<dimen name="font_size_main">16sp</dimen>-->
+    <!--<dimen name="font_size_minor">14sp</dimen>-->
+    <!--<dimen name="font_size_small">12sp</dimen>-->
+
 </resources>

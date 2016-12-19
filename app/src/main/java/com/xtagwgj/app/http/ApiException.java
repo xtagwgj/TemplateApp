@@ -46,12 +46,16 @@ public class ApiException extends RuntimeException {
                 message = "服务器遇到错误，无法完成请求";
                 break;
 
+
             case USER_NOT_EXIST:
                 message = "该用户不存在";
                 break;
+
             case WRONG_PASSWORD:
                 message = "密码错误";
                 break;
+
+
             default:
                 message = "未知错误";
 

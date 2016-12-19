@@ -1,8 +1,8 @@
 <resources>
     <string-array name="navi_bottom_name">
         <item>维修</item>
-        <item>公告</item>
         <item>管理</item>
+        <item>公告</item>
         <item>我的</item>
     </string-array>
 
@@ -22,11 +22,16 @@
     <string name="prompt_re_password">请再次输入新密码</string>
     <string name="prompt_verify_code">请输入验证码</string>
 
+
     <string name="error_phone">请输入正确的手机号码</string>
     <string name="error_verify_code">请输入正确的验证码</string>
     <string name="error_two_password">两次密码输入不正确</string>
 
-    
+
     <string name="title_forget_pwd">忘记密码</string>
+    <string name="title_about">关于</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

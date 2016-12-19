@@ -9,12 +9,12 @@
 
     <color name="gray">#898989</color>
 
-    <color name="button_color">#2672ac</color>
-    <color name="button_deep_color">#095793</color>
+    <color name="colorButton">#2672ac</color>
+    <color name="colorDeepButton">#095793</color>
+    <color name="colorLoginBackground">#06487a</color>
 
-    <color name="font_white">#ffffff</color>
-    <color name="font_blue">#4c8cbb</color>
-    <color name="bg_login">#06487a</color>
-
+    <!--字体-->
+    <color name="colorFontWhite">#ffffff</color>
+    <color name="colorFontBlue">#4c8cbb</color>
 
 </resources>
