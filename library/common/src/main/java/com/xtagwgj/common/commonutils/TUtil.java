@@ -3,6 +3,7 @@ package com.xtagwgj.common.commonutils;
 import java.lang.reflect.ParameterizedType;
 
 /**
+ * 反射获取泛型参数
  * Created by xtagwgj on 2016/12/11.
  */
 

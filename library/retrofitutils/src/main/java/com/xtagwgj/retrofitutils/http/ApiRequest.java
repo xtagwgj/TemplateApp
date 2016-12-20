@@ -4,9 +4,11 @@ package com.xtagwgj.retrofitutils.http;
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.commonutils.NetWorkUtils;
 import com.xtagwgj.retrofitutils.http.cookie.CookiesManager;
+import com.xtagwgj.retrofitutils.http.factory.HttpsFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -30,15 +32,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public enum ApiRequest {
     instance;
 
-    private Retrofit retrofit;
     private String BASE_URL = "http:/183.61.80.249:8080/property/";
+    private final int DEFAULT_TIMEOUT = 5;
+    private InputStream[] certificatesStream;
+    private int[] certificatesInt;
+    private String[] httpsHosts;
+    private InputStream bksFile;
+    private String password;
+
+    private Retrofit retrofit;
     private boolean showLog = true;
 
-    private static final int DEFAULT_TIMEOUT = 5;
 
     ApiRequest() {
-        initRetrofit(BASE_URL, true);
+        build();
     }
+
 
     public String getBASE_URL() {
         return new String(BASE_URL);
@@ -46,24 +55,51 @@ public enum ApiRequest {
 
     /**
      * @param baseUrl 服务器地址
-     * @param showLog 是否显示日志
      */
-    public void initRetrofit(String baseUrl, boolean showLog) {
+    public ApiRequest initRetrofit(String baseUrl) {
         if (!BASE_URL.equalsIgnoreCase(baseUrl)) {
             this.BASE_URL = baseUrl;
-            this.showLog = showLog;
             if (retrofit != null)
                 retrofit = null;
         }
 
+        return this;
+    }
+
+    public void build() {
         OkHttpClient client = createOkHttpBuilder(showLog).build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
                 .build();
+    }
+
+    public ApiRequest setCertificatesStream(InputStream... certificatesStream) {
+        this.certificatesStream = certificatesStream;
+        return this;
+    }
+
+    public ApiRequest setCertificatesStream(InputStream bksFile, String password, InputStream... certificatesStream) {
+        this.bksFile = bksFile;
+        this.password = password;
+        this.certificatesStream = certificatesStream;
+        return this;
+    }
+
+    public ApiRequest setCertificatesStream(InputStream bksFile, String password, String[] httpsHosts, int... certificatesStream) {
+        this.bksFile = bksFile;
+        this.password = password;
+        this.certificatesInt = certificatesStream;
+        this.httpsHosts = httpsHosts;
+        return this;
+    }
+
+    public ApiRequest showLog(boolean isShowLog) {
+        this.showLog = isShowLog;
+        return this;
     }
 
     /**
@@ -80,7 +116,6 @@ public enum ApiRequest {
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-//        httpClientBuilder.addInterceptor(new com.xtagwgj.optimal.http.factory.OkHttpInterceptor().Bu)
         /**
          * 超时重连
          */
@@ -107,11 +142,17 @@ public enum ApiRequest {
          *支持https传输
          */
 
-        //certificates 是你raw下证书源ID, int[] certificates = {R.raw.myssl}
-//        httpClientBuilder.socketFactory(HttpsFactroy.getSSLSocketFactory(BaseApplication.getAppContext(), certificates));
+        if (certificatesStream != null)
+            httpClientBuilder.socketFactory(HttpsFactory.getSslSocketFactory(certificatesStream, bksFile, password));
+
+        //certificatesStream 是你raw下证书源ID, int[] certificatesStream = {R.raw.myssl}
+        if (certificatesInt != null)
+            httpClientBuilder.socketFactory(HttpsFactory.getSSLSocketFactory(BaseApplication.getAppContext(), certificatesInt));
 
         //hosts是你的host数据 列如 String hosts[]`= {“https//:aaaa,com”, “https//:bbb.com”}
-//        httpClientBuilder.hostnameVerifier(HttpsFactroy.getHostnameVerifier(hosts));
+        if (httpsHosts != null)
+            httpClientBuilder.hostnameVerifier(HttpsFactory.getHostnameVerifier(httpsHosts));
+
 
         return httpClientBuilder;
     }
@@ -211,10 +252,9 @@ public enum ApiRequest {
      */
     public <T> T create(Class<T> service) {
         if (retrofit == null) {
-            initRetrofit(BASE_URL, showLog);
+            initRetrofit(BASE_URL);
         }
 
         return retrofit.create(service);
     }
-
 }

@@ -12,6 +12,7 @@ import com.xtagwgj.retrofitutils.http.ApiRequest;
 import cn.jpush.android.api.JPushInterface;
 
 /**
+ * 应用
  * Created by xtagwgj on 2016/12/10.
  */
 
@@ -32,7 +33,13 @@ public class MyApplication extends BaseApplication {
     }
 
     private void initNet() {
-        ApiRequest.instance.initRetrofit("http://iyuns.ylxmall.com:8080/property/", true);
+        ApiRequest.instance
+                .initRetrofit("https://iyuns.ylxmall.com/property/")
+//                .setCertificatesStream(new Buffer()
+//                        .writeUtf8(CER)
+//                        .inputStream())
+                .showLog(BuildConfig.DEBUG)
+                .build();
     }
 
     private void initLogger() {
