@@ -142,12 +142,12 @@ public enum ApiRequest {
          *支持https传输
          */
 
-        if (certificatesStream != null)
-            httpClientBuilder.socketFactory(HttpsFactory.getSslSocketFactory(certificatesStream, bksFile, password));
+//        if (certificatesStream != null)
+//            httpClientBuilder.socketFactory(HttpsFactory.getSslSocketFactory(certificatesStream, bksFile, password));
 
         //certificatesStream 是你raw下证书源ID, int[] certificatesStream = {R.raw.myssl}
         if (certificatesInt != null)
-            httpClientBuilder.socketFactory(HttpsFactory.getSSLSocketFactory(BaseApplication.getAppContext(), certificatesInt));
+            httpClientBuilder.sslSocketFactory(HttpsFactory.getSSLSocketFactory(BaseApplication.getAppContext(), certificatesInt));
 
         //hosts是你的host数据 列如 String hosts[]`= {“https//:aaaa,com”, “https//:bbb.com”}
         if (httpsHosts != null)
