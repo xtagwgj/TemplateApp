@@ -19,7 +19,6 @@
             android:textSize="20sp"
             tools:text="eg" />
 
-
         <EditText
             android:id="@+id/et_input"
             android:layout_width="match_parent"

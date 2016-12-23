@@ -34,8 +34,7 @@ public enum ApiRequest {
 
     private String BASE_URL = "http:/183.61.80.249:8080/property/";
     private final int DEFAULT_TIMEOUT = 5;
-    private InputStream[] certificatesStream;
-    private int[] certificatesInt;
+    private int[] certificates;
     private String[] httpsHosts;
     private InputStream bksFile;
     private String password;
@@ -77,22 +76,30 @@ public enum ApiRequest {
                 .build();
     }
 
-    public ApiRequest setCertificatesStream(InputStream... certificatesStream) {
-        this.certificatesStream = certificatesStream;
+
+    public ApiRequest setCertificates(int... certificatesStream) {
+        this.certificates = certificatesStream;
         return this;
     }
 
-    public ApiRequest setCertificatesStream(InputStream bksFile, String password, InputStream... certificatesStream) {
-        this.bksFile = bksFile;
+    public ApiRequest setCertificates(int[] certificatesStream, InputStream bksFile, String password) {
+        this.certificates = certificatesStream;
         this.password = password;
-        this.certificatesStream = certificatesStream;
+        this.bksFile = bksFile;
         return this;
     }
 
-    public ApiRequest setCertificatesStream(InputStream bksFile, String password, String[] httpsHosts, int... certificatesStream) {
+    public ApiRequest setBks(InputStream bksFile) {
         this.bksFile = bksFile;
+        return this;
+    }
+
+    public ApiRequest setPassword(String password) {
         this.password = password;
-        this.certificatesInt = certificatesStream;
+        return this;
+    }
+
+    public ApiRequest setHttpHosts(String[] httpsHosts) {
         this.httpsHosts = httpsHosts;
         return this;
     }
@@ -142,12 +149,11 @@ public enum ApiRequest {
          *支持https传输
          */
 
-//        if (certificatesStream != null)
-//            httpClientBuilder.socketFactory(HttpsFactory.getSslSocketFactory(certificatesStream, bksFile, password));
-
         //certificatesStream 是你raw下证书源ID, int[] certificatesStream = {R.raw.myssl}
-        if (certificatesInt != null)
-            httpClientBuilder.sslSocketFactory(HttpsFactory.getSSLSocketFactory(BaseApplication.getAppContext(), certificatesInt));
+        if (certificates != null)
+//            httpClientBuilder.sslSocketFactory(HttpsFactory.getSSLSocketFactory(certificates, bksFile, password));
+            httpClientBuilder.sslSocketFactory(HttpsFactory.getSSLSocketFactory(BaseApplication.getAppContext(), certificates));
+
 
         //hosts是你的host数据 列如 String hosts[]`= {“https//:aaaa,com”, “https//:bbb.com”}
         if (httpsHosts != null)
@@ -257,4 +263,5 @@ public enum ApiRequest {
 
         return retrofit.create(service);
     }
+
 }

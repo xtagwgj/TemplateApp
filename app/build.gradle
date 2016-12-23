@@ -16,6 +16,19 @@ android {
         versionCode cfg.version_code
         versionName cfg.version_name
         vectorDrawables.useSupportLibrary = true
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
+        manifestPlaceholders = [
+                applicationIds     : cfg.package_name,
+                JPUSH_PKGNAME      : cfg.package_name,
+//                JPUSH_APPKEY       : cfg.JPUSH_APPKEY_DEBUG, //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL      : "developer-default", //暂时填写默认值即可.
+                JPUSH_RECEIVER_NAME: "${cfg.package_name}.receiver.JPushReceiver", //根据包名动态修改JPush接收者的路径
+        ]
     }
 
 //    signingConfigs {
@@ -32,13 +45,10 @@ android {
             resValue "string", "app_name", "${cfg.debug_app_name}"
 
             manifestPlaceholders = [
-                    JPUSH_PKGNAME      : "${cfg.package_name}.debug",
                     JPUSH_APPKEY       : cfg.JPUSH_APPKEY_DEBUG, //JPush上注册的包名对应的appkey.
-                    JPUSH_CHANNEL      : "developer-default", //暂时填写默认值即可.
-                    JPUSH_RECEIVER_NAME: "${cfg.package_name}.debug.receiver.JPushReceiver", //根据包名动态修改JPush接收者的路径
             ]
 
-            applicationIdSuffix ".debug"//会影响manifest中的配置，删除的话要及时修改
+//            applicationIdSuffix ".debug"//会影响manifest中的配置，删除的话要及时修改
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
@@ -48,12 +58,10 @@ android {
             resValue "string", "app_name", "${cfg.release_app_name}"
 
             manifestPlaceholders = [
-                    JPUSH_PKGNAME      : cfg.package_name,
                     JPUSH_APPKEY       : cfg.JPUSH_APPKEY_RELEASE, //JPush上注册的包名对应的appkey.
-                    JPUSH_CHANNEL      : "developer-default", //暂时填写默认值即可.
-                    JPUSH_RECEIVER_NAME: "${cfg.package_name}.receiver.JPushReceiver", //
             ]
 
+            //因为正式版加入了混淆，在该工程的混淆文件中记得添加本app的实地类地址，不然解析不了请求的数据
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
@@ -131,7 +139,7 @@ dependencies {
     compile "com.elvishew:xlog:${libs.xlog}"
 
     //Bugly
-    compile "com.tencent.bugly:crashreport:${libs.bugly}"
+    compile "com.tencent.bugly:crashreport_upgrade:${libs.bugly}"
 
     //此处以JPush 3.0.0 版本为例。
     compile "cn.jiguang.sdk:jpush:${libs.jpush}"

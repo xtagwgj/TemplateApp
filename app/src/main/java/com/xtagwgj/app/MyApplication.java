@@ -10,7 +10,7 @@ import com.elvishew.xlog.formatter.message.throwable.DefaultThrowableFormatter;
 import com.elvishew.xlog.printer.file.FilePrinter;
 import com.elvishew.xlog.printer.file.backup.FileSizeBackupStrategy;
 import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.bugly.Bugly;
 import com.xtagwgj.app.base.Constant;
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.loadinglayout.LoadingLayout;
@@ -52,33 +52,38 @@ public class MyApplication extends BaseApplication {
     private void initNet() {
         ApiRequest.instance
                 .initRetrofit("https://iyuns.ylxmall.com/property/")
-                .setCertificatesStream(null, null, null)
-//                .setCertificatesStream(new Buffer()
-//                        .writeUtf8(CER)
-//                        .inputStream())
+//                .setCertificates(certificatesStream)
                 .showLog(BuildConfig.DEBUG)
                 .build();
     }
 
     private void initLogger() {
         //初始化bugly日志
-        CrashReport.initCrashReport(getApplicationContext(), Constant.CrashAppId, BuildConfig.DEBUG);
+        Bugly.init(getApplicationContext(), Constant.CrashAppId, BuildConfig.DEBUG);
 
         //初始化其他日志
-        XLog.init(
-                LogLevel.ALL,
-                new LogConfiguration                                             // 如果没有指定 LogConfiguration，会默认使用 new LogConfiguration.Builder().build()
-                        .Builder()                                               // 打印日志时会用到的配置
-                        .tag("MY_TAG")                                           // 默认: "XLOG"
-                        .jsonFormatter(new DefaultJsonFormatter())               // 默认: DefaultJsonFormatter
-                        .throwableFormatter(new DefaultThrowableFormatter())     // 默认: DefaultThrowableFormatter
-                        .b()
-                        .build(),
-                new FilePrinter                                                  // 打印日志到文件。如果没有指定，则不会使用
-                        .Builder(getLogFile().getPath())                         // 保存日志文件的路径
-                        .fileNameGenerator(new DateFileNameGenerator())          // 默认: ChangelessFileNameGenerator("log")
-                        .backupStrategy(new FileSizeBackupStrategy(1024 * 1024)) // 默认: FileSizeBackupStrategy(1024 * 1024)
-                        .build());
+        if (BuildConfig.DEBUG) {
+
+            XLog.init(new LogConfiguration.Builder()
+                    .logLevel(LogLevel.ALL)
+                    .b()
+                    .build());
+        } else
+
+            XLog.init(
+                    LogLevel.ALL,
+                    new LogConfiguration                                             // 如果没有指定 LogConfiguration，会默认使用 new LogConfiguration.Builder().build()
+                            .Builder()                                               // 打印日志时会用到的配置
+                            .tag("MY_TAG")                                           // 默认: "XLOG"
+                            .jsonFormatter(new DefaultJsonFormatter())               // 默认: DefaultJsonFormatter
+                            .throwableFormatter(new DefaultThrowableFormatter())     // 默认: DefaultThrowableFormatter
+                            .b()
+                            .build(),
+                    new FilePrinter                                                  // 打印日志到文件。如果没有指定，则不会使用
+                            .Builder(getLogFile().getPath())                         // 保存日志文件的路径
+                            .fileNameGenerator(new DateFileNameGenerator())          // 默认: ChangelessFileNameGenerator("log")
+                            .backupStrategy(new FileSizeBackupStrategy(1024 * 1024)) // 默认: FileSizeBackupStrategy(1024 * 1024)
+                            .build());
     }
 
     private void initLoadingLayout() {
