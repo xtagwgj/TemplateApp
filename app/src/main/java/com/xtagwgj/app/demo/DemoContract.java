@@ -7,7 +7,7 @@ import com.xtagwgj.common.mvp.BaseView;
  * Created by xtagwgj on 2016/12/11.
  */
 
-public class DemoContract {
+class DemoContract {
     interface View extends BaseView<Presenter> {
 
         void setTitle(String title);

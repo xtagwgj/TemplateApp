@@ -19,12 +19,13 @@ import static com.xtagwgj.common.commonutils.ConstUtils.REGEX_ZH;
 
 
 /**
+ * 正则表达式工具
  * Created by xtagwgj on 2016/12/13.
  */
 
 public class RegexUtils {
 
-    private RegexUtils() {
+     RegexUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

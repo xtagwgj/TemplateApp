@@ -19,7 +19,7 @@ import rx.Subscriber;
  * Created by xtagwgj on 2016/12/11.
  */
 
-public class DemoPresenter implements DemoContract.Presenter {
+class DemoPresenter implements DemoContract.Presenter {
 
     private DemoContract.View mView;
     private RxAppCompatActivity context;
@@ -44,7 +44,7 @@ public class DemoPresenter implements DemoContract.Presenter {
     public void login(String username, String password) {
 
         apiDemo.login(username, password,
-                new ProgressSubscriber<List<LoginInfoResponse>>(new HttpOnNextListener<List<LoginInfoResponse>>() {
+                new ProgressSubscriber<>(new HttpOnNextListener<List<LoginInfoResponse>>() {
                     @Override
                     public void onNext(List<LoginInfoResponse> o) {
                         if (o != null) {

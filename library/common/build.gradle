@@ -37,8 +37,6 @@ dependencies {
 
     compile files('libs/commons-codec-1.6.jar')
 
-    compile "com.zhy:autolayout:${libs.autolayout}"
-
     compile "com.jakewharton.rxbinding:rxbinding:${libs.rxbinding}"
     compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${libs.rxbinding}"
     compile "com.jakewharton.rxbinding:rxbinding-design:${libs.rxbinding}"

@@ -86,7 +86,6 @@ android {
         exclude "META-INF/LICENSE"
         exclude "META-INF/NOTICE"
         exclude "META-INF/LICENSE.txt"
-
     }
 
     //设置虚拟机堆内存空间大小，避免在编译期间OOM
@@ -115,16 +114,15 @@ dependencies {
 
     //导入的jar包中的文件
     compile project(path: ':library:common')
-    compile project(path: ':library:irecyclerview')
+//    compile project(path: ':library:irecyclerview')
     compile project(path: ':library:retrofitutils')
     compile project(path: ':library:jcvideoplayer')
 
     //依赖的第三方包
 
-    compile "com.flyco.tablayout:FlycoTabLayout_Lib:${libs.flyco_tablayout}"
+    compile "com.jcodecraeer:xrecyclerview:${libs.xrecyclerview}"
 
-    //捕捉crash https://github.com/Sunzxyong/Recovery/blob/master/README.md
-    compile "com.zxy.android:recovery:${libs.recovery}"
+    compile "com.flyco.tablayout:FlycoTabLayout_Lib:${libs.flyco_tablayout}"
 
     //dagger
     compile "com.google.dagger:dagger:${libs.dagger}"
@@ -145,7 +143,6 @@ dependencies {
     compile "cn.jiguang.sdk:jpush:${libs.jpush}"
     // 此处以JCore 1.0.0 版本为例。
     compile "cn.jiguang.sdk:jcore:${libs.jcore}"
-
 
     testCompile 'junit:junit:4.12'
 }

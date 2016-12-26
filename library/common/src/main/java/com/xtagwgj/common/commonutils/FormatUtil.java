@@ -14,7 +14,12 @@ import java.util.regex.Pattern;
 /**
  * 格式化验证
  */
-public class FormatUtil {
+public class FormatUtil extends RegexUtils{
+
+    private FormatUtil() {
+        super();
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
 
     /**
      * 判断是否全是数字

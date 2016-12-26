@@ -21,7 +21,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import pub.devrel.easypermissions.EasyPermissions;
-import rx.functions.Action1;
 
 /**
  * Created by xtagwgj on 2016/12/11.
@@ -103,21 +102,16 @@ public class DemoFragment extends BaseFragment implements DemoContract.View, Eas
 
         RxView.clicks(btn_login)
                 .throttleFirst(1, TimeUnit.SECONDS)
-                .subscribe(new Action1<Void>() {
-                    @Override
-                    public void call(Void aVoid) {
-                        mPresenter.login("18566077938", "e0eaca43a1c2a57221cac6d0f8758e88");
-                    }
+                .subscribe(aVoid -> {
+                    mPresenter.login("18566077938", "e0eaca43a1c2a57221cac6d0f8758e88");
                 });
 
         RxView.clicks(btn_getAd)
                 .throttleFirst(1, TimeUnit.SECONDS)
-                .subscribe(new Action1<Void>() {
-                    @Override
-                    public void call(Void aVoid) {
-                        mPresenter.getAd("0", 0);
-                    }
+                .subscribe(aVoid -> {
+                    mPresenter.getAd("0", 0);
                 });
+
     }
 
     /**

@@ -20,13 +20,6 @@ public class BaseApplication extends Application {
     public static Context getAppContext() {
         return baseApplication;
     }
-//    public static Resources getAppResources() {
-//        return baseApplication.getResources();
-//    }
-//    @Override
-//    public void onTerminate() {
-//        super.onTerminate();
-//    }
 
     /**
      * 分包

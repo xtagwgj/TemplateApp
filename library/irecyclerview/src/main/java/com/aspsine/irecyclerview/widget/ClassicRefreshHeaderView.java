@@ -77,9 +77,9 @@ public class ClassicRefreshHeaderView extends RelativeLayout implements RefreshT
                     rotated = false;
                 }
 
-                tvRefresh.setText("SWIPE TO REFRESH");
+                tvRefresh.setText(getContext().getString(R.string.swipe_to_refresh));
             } else {
-                tvRefresh.setText("RELEASE TO REFRESH");
+                tvRefresh.setText(getContext().getString(R.string.release_to_refresh));
                 if (!rotated) {
                     ivArrow.clearAnimation();
                     ivArrow.startAnimation(rotateUp);
@@ -95,7 +95,7 @@ public class ClassicRefreshHeaderView extends RelativeLayout implements RefreshT
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
-        tvRefresh.setText("REFRESHING");
+        tvRefresh.setText(getContext().getString(R.string.refreshing));
     }
 
     @Override
@@ -110,7 +110,7 @@ public class ClassicRefreshHeaderView extends RelativeLayout implements RefreshT
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(GONE);
-        tvRefresh.setText("COMPLETE");
+        tvRefresh.setText(getContext().getString(R.string.complete));
     }
 
     @Override
