@@ -3,7 +3,6 @@ package com.xtagwgj.common.base;
 
 import android.os.Bundle;
 
-import com.xtagwgj.common.BaseCompatActivity;
 import com.xtagwgj.common.R;
 
 import butterknife.ButterKnife;

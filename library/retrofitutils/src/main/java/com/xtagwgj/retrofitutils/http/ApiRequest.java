@@ -10,10 +10,10 @@ import com.xtagwgj.retrofitutils.http.interceptor.LoggingInterceptor;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -41,6 +41,11 @@ public enum ApiRequest {
     private Retrofit retrofit;
     private boolean showLog = true;
 
+    /**
+     * 要添加的公共参数
+     */
+    private Map<String, String> publicMap;
+
 
     ApiRequest() {
         build();
@@ -65,8 +70,9 @@ public enum ApiRequest {
     }
 
     public void build() {
-        OkHttpClient client = createOkHttpBuilder(showLog).build();
+        retrofit = null;
 
+        OkHttpClient client = createOkHttpBuilder(showLog).build();
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -105,6 +111,11 @@ public enum ApiRequest {
 
     public ApiRequest showLog(boolean isShowLog) {
         this.showLog = isShowLog;
+        return this;
+    }
+
+    public ApiRequest setPublicMap(Map<String, String> publicMap) {
+        this.publicMap = publicMap;
         return this;
     }
 
@@ -163,28 +174,61 @@ public enum ApiRequest {
         if (httpsHosts != null)
             httpClientBuilder.hostnameVerifier(HttpsFactory.getHostnameVerifier(httpsHosts));
 
+        //添加其他的拦截器
+        if (publicMap != null && publicMap.size() > 0) {
+            httpClientBuilder.addInterceptor(getPublicParameter(publicMap));
+        }
 
         return httpClientBuilder;
     }
 
+//    /**
+//     * 公共参数
+//     *
+//     * @return
+//     */
+//    private Interceptor getPublicParameter() {
+//        Interceptor addQueryParameterInterceptor = new Interceptor() {
+//            @Override
+//            public Response intercept(Chain chain) throws IOException {
+//                Request originalRequest = chain.request();
+//                Request request;
+//                String method = originalRequest.method();
+//                Headers headers = originalRequest.headers();
+//                HttpUrl modifiedUrl = originalRequest.url().newBuilder()
+//                        // Provide your custom parameter here
+//                        .addQueryParameter("platform", "android")
+//                        .addQueryParameter("version", "1.0.0")
+//                        .build();
+//                request = originalRequest.newBuilder().url(modifiedUrl).build();
+//                return chain.proceed(request);
+//            }
+//        };
+//        return addQueryParameterInterceptor;
+//    }
+
     /**
      * 公共参数
      *
+     * @param publicMap 公共键值对
      * @return
      */
-    private Interceptor getPublicParameter() {
+    private Interceptor getPublicParameter(final Map<String, String> publicMap) {
         Interceptor addQueryParameterInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 Request request;
-                String method = originalRequest.method();
-                Headers headers = originalRequest.headers();
-                HttpUrl modifiedUrl = originalRequest.url().newBuilder()
-                        // Provide your custom parameter here
-                        .addQueryParameter("platform", "android")
-                        .addQueryParameter("version", "1.0.0")
-                        .build();
+//                String method = originalRequest.method();
+//                Headers headers = originalRequest.headers();
+                HttpUrl.Builder builder = originalRequest.url().newBuilder();
+
+                for (Map.Entry<String, String> stringStringEntry : publicMap.entrySet()) {
+                    builder.addQueryParameter(stringStringEntry.getKey(), stringStringEntry.getValue());
+                }
+
+                HttpUrl modifiedUrl = builder.build();
+
                 request = originalRequest.newBuilder().url(modifiedUrl).build();
                 return chain.proceed(request);
             }

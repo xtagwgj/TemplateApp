@@ -10,7 +10,7 @@ android {
     buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
-        applicationId cfg.package_name
+        applicationId cfg.package_name_debug
         minSdkVersion cfg.minSdk
         targetSdkVersion cfg.targetSdk
         versionCode cfg.version_code
@@ -23,11 +23,7 @@ android {
         }
 
         manifestPlaceholders = [
-                applicationIds     : cfg.package_name,
-                JPUSH_PKGNAME      : cfg.package_name,
-//                JPUSH_APPKEY       : cfg.JPUSH_APPKEY_DEBUG, //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL      : "developer-default", //暂时填写默认值即可.
-                JPUSH_RECEIVER_NAME: "${cfg.package_name}.receiver.JPushReceiver", //根据包名动态修改JPush接收者的路径
         ]
     }
 
@@ -45,7 +41,10 @@ android {
             resValue "string", "app_name", "${cfg.debug_app_name}"
 
             manifestPlaceholders = [
+                    applicationIds     : cfg.package_name_debug,
                     JPUSH_APPKEY       : cfg.JPUSH_APPKEY_DEBUG, //JPush上注册的包名对应的appkey.
+                    JPUSH_PKGNAME      : cfg.package_name_debug,
+                    JPUSH_RECEIVER_NAME: "${cfg.package_name_debug}.receiver.JPushReceiver", //根据包名动态修改JPush接收者的路径
             ]
 
 //            applicationIdSuffix ".debug"//会影响manifest中的配置，删除的话要及时修改
@@ -58,7 +57,10 @@ android {
             resValue "string", "app_name", "${cfg.release_app_name}"
 
             manifestPlaceholders = [
+                    applicationIds     : cfg.package_name,
                     JPUSH_APPKEY       : cfg.JPUSH_APPKEY_RELEASE, //JPush上注册的包名对应的appkey.
+                    JPUSH_PKGNAME      : cfg.package_name,
+                    JPUSH_RECEIVER_NAME: "${cfg.package_name}.receiver.JPushReceiver", //根据包名动态修改JPush接收者的路径
             ]
 
             //因为正式版加入了混淆，在该工程的混淆文件中记得添加本app的实地类地址，不然解析不了请求的数据
@@ -125,9 +127,9 @@ dependencies {
     compile "com.flyco.tablayout:FlycoTabLayout_Lib:${libs.flyco_tablayout}"
 
     //dagger
-    compile "com.google.dagger:dagger:${libs.dagger}"
-    apt "com.google.dagger:dagger-compiler:${libs.dagger}"
-    provided "org.glassfish:javax.annotation:${libs.javax_annotation}"
+//    compile "com.google.dagger:dagger:${libs.dagger}"
+//    apt "com.google.dagger:dagger-compiler:${libs.dagger}"
+//    provided "org.glassfish:javax.annotation:${libs.javax_annotation}"
 
     //butterknife
     compile "com.jakewharton:butterknife:${libs.butterknief}"//view注解

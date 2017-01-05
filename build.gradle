@@ -32,6 +32,7 @@ task clean(type: Delete) {
 ext {
     configuration = [
             package_name        : "com.xtagwgj.app",
+            package_name_debug  : "com.xtagwgj.app.debug",
             buildToolsVersion   : "25.0.1",
             compileVersion      : 25,
             minSdk              : 19,
@@ -70,7 +71,7 @@ ext {
             flyco_tablayout    : "2.1.0@aar",
             jpush              : "3.0.0",
             jcore              : "1.0.0",
-            freeline              : "0.8.4",
+            freeline           : "0.8.4",
 
     ]
 }

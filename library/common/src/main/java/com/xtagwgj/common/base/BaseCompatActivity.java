@@ -1,5 +1,6 @@
-package com.xtagwgj.common;
+package com.xtagwgj.common.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,8 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.Window;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xtagwgj.common.base.AppManager;
-import com.xtagwgj.common.base.RxManager;
+import com.xtagwgj.common.R;
 import com.xtagwgj.common.commonutils.ToastUtils;
 import com.xtagwgj.common.commonwidget.LoadingDialogUtils;
 import com.xtagwgj.common.commonwidget.StatusBarCompat;
@@ -111,6 +111,18 @@ public abstract class BaseCompatActivity extends RxAppCompatActivity {
         overridePendingTransition(R.anim.fade_in,
                 R.anim.fade_out);
 
+    }
+
+    public static void doActionAndFinishThis(Activity activity, Class<?> cls) {
+        doAction(activity, cls);
+        AppManager.getAppManager().finishActivity(activity);
+    }
+
+    public static void doAction(Activity activity, Class<?> cls) {
+        Intent intent = new Intent(activity, cls);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.fade_in,
+                R.anim.fade_out);
     }
 
     /**

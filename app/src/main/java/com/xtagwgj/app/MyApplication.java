@@ -50,10 +50,13 @@ public class MyApplication extends BaseApplication {
     }
 
     private void initNet() {
+        //
+
         ApiRequest.instance
                 .initRetrofit("https://iyuns.ylxmall.com/property/")
 //                .setCertificates(certificatesStream)
                 .showLog(BuildConfig.DEBUG)
+//                .setPublicMap()
                 .build();
     }
 
