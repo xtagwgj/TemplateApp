@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.trello.rxlifecycle.components.RxFragment;
 import com.xtagwgj.common.commonutils.ToastUtils;
 import com.xtagwgj.common.commonwidget.LoadingDialogUtils;
 
@@ -39,7 +38,7 @@ import butterknife.Unbinder;
 //    public void initView() {
 //    }
 //}
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment extends com.trello.rxlifecycle.components.support.RxFragment {
     protected View rootView;
     public RxManager mRxManager;
     protected Unbinder unbind;

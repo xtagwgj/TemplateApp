@@ -32,7 +32,7 @@ public class DemoActivity extends BaseActivity {
         tvTitle = (TextView) findViewById(R.id.tvTitle);
 
         DemoFragment demoFragment =
-                (DemoFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
+                (DemoFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
 
         if (demoFragment == null) {
             demoFragment = DemoFragment.newInstance();
@@ -43,7 +43,7 @@ public class DemoActivity extends BaseActivity {
                 tvTitle.setText("none");
             }
 
-            ActivityUtils.addFragmentToActivity(getFragmentManager(),
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     demoFragment, R.id.contentFrame);
 
         }

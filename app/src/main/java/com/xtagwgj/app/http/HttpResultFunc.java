@@ -1,7 +1,6 @@
 package com.xtagwgj.app.http;
 
 import com.elvishew.xlog.XLog;
-import com.google.gson.Gson;
 import com.xtagwgj.app.domain.RequestResult;
 
 import rx.functions.Func1;
@@ -15,17 +14,14 @@ import rx.functions.Func1;
 public class HttpResultFunc<T> implements Func1<RequestResult<T>, T> {
 
     private static final String Tag = "HttpResultFunc";
-    private Gson gson = new Gson();
 
     @Override
     public T call(RequestResult<T> tRequestResult) {
         XLog.e(Tag, "服务器返回等待处理的数据: ");
-        if (gson != null)
-            XLog.json(gson.toJson(tRequestResult));
 
         if (!tRequestResult.isSuccess()) {
             XLog.e(Tag, "服务器返回数据携带错误信息: " + tRequestResult.getError_code() + "->" + tRequestResult.getError_desc());
-            throw new ApiException(tRequestResult.getError_desc());
+            throw new ApiException(tRequestResult.getError_code(), tRequestResult.getError_desc());
         }
 
         return tRequestResult.getObj();

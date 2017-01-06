@@ -1,9 +1,9 @@
 package com.xtagwgj.app.ui.main;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 import com.elvishew.xlog.XLog;
@@ -113,13 +113,13 @@ public class MainActivity extends BaseActivity {
      * 初始化碎片
      */
     private void initFragment(Bundle savedInstanceState) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         int currentTabPosition = 0;
         if (savedInstanceState != null) {
-            maintainFragment = (MaintainFragment) getFragmentManager().findFragmentByTag("maintainFragment");
-            managementFragment = (ManagementFragment) getFragmentManager().findFragmentByTag("maintainFragment");
-            boardFragment = (BoardFragment) getFragmentManager().findFragmentByTag("boardFragment");
-            meFragment = (MeFragment) getFragmentManager().findFragmentByTag("meFragment");
+            maintainFragment = (MaintainFragment) getSupportFragmentManager().findFragmentByTag("maintainFragment");
+            managementFragment = (ManagementFragment) getSupportFragmentManager().findFragmentByTag("maintainFragment");
+            boardFragment = (BoardFragment) getSupportFragmentManager().findFragmentByTag("boardFragment");
+            meFragment = (MeFragment) getSupportFragmentManager().findFragmentByTag("meFragment");
             currentTabPosition = savedInstanceState.getInt(Constant.HOME_CURRENT_TAB_POSITION);
         } else {
             maintainFragment = new MaintainFragment();
@@ -141,7 +141,7 @@ public class MainActivity extends BaseActivity {
      * 切换
      */
     private void SwitchTo(int position) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.hide(maintainFragment);
         transaction.hide(boardFragment);

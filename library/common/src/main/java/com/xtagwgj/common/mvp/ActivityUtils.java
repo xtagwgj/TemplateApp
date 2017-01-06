@@ -25,4 +25,15 @@ public class ActivityUtils {
         transaction.add(frameId, fragment);
         transaction.commit();
     }
+
+    public static void addFragmentToActivity (@NonNull android.support.v4.app.FragmentManager fragmentManager,
+                                              @NonNull android.support.v4.app.Fragment fragment, int frameId) {
+        if(fragment==null || fragmentManager==null){
+            throw new NullPointerException("fragment or fragmentManager must not be null");
+        }
+
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(frameId, fragment);
+        transaction.commit();
+    }
 }

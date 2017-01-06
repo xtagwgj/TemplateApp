@@ -5,21 +5,21 @@ package com.xtagwgj.app.http;
  * Created by xtagwgj on 2016/12/13.
  */
 
-public class ApiException extends RuntimeException {
-     static final int Error_400 = 400;
-     static final int Error_404 = 404;
-     static final int Error_408 = 408;
-     static final int Error_500 = 500;
+ class ApiException extends RuntimeException {
+    private static final int Error_400 = 400;
+    private static final int Error_404 = 404;
+    private static final int Error_408 = 408;
+    private static final int Error_500 = 500;
 
-    static final int USER_NOT_EXIST = 100;
-    static final int WRONG_PASSWORD = 101;
+    private static final int USER_NOT_EXIST = 100;
+    private  static final int WRONG_PASSWORD = 101;
 
-    public ApiException(int resultCode) {
-        this(getApiExceptionMessage(resultCode));
+    ApiException(int resultCode, String detailsMessage) {
+        getApiExceptionMessage(resultCode, detailsMessage);
     }
 
-    public ApiException(String detailMessage) {
-        super(detailMessage);
+    ApiException(String resultCode, String detailsMessage) {
+        this(Integer.valueOf(resultCode), detailsMessage);
     }
 
 
@@ -30,8 +30,8 @@ public class ApiException extends RuntimeException {
      * @param code
      * @return
      */
-    private static String getApiExceptionMessage(int code) {
-        String message ;
+    private static String getApiExceptionMessage(int code, String detailsMessage) {
+        String message;
         switch (code) {
             case Error_400:
                 message = "错误请求";
@@ -57,7 +57,7 @@ public class ApiException extends RuntimeException {
 
 
             default:
-                message = "未知错误";
+                message = detailsMessage;
 
         }
         return message;
