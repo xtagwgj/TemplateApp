@@ -32,15 +32,15 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
 
     protected static Timer DISMISS_CONTROL_VIEW_TIMER;
 
-    public ImageView   backButton;
+    public ImageView backButton;
     public ProgressBar bottomProgressBar, loadingProgressBar;
-    public TextView  titleTextView;
+    public TextView titleTextView;
     public ImageView thumbImageView;
     public ImageView coverImageView;
     public ImageView tinyBackImageView;
 
-    private static Bitmap  pauseSwitchCoverBitmap = null;
-    private static boolean isRefreshCover         = false;
+    private static Bitmap pauseSwitchCoverBitmap = null;
+    private static boolean isRefreshCover = false;
 
     protected DismissControlViewTimerTask mDismissControlViewTimerTask;
 
@@ -569,11 +569,11 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         }
     }
 
-    protected Dialog      mProgressDialog;
+    protected Dialog mProgressDialog;
     protected ProgressBar mDialogProgressBar;
-    protected TextView    mDialogSeekTime;
-    protected TextView    mDialogTotalTime;
-    protected ImageView   mDialogIcon;
+    protected TextView mDialogSeekTime;
+    protected TextView mDialogTotalTime;
+    protected ImageView mDialogIcon;
 
     @Override
     public void showProgressDialog(float deltaX, String seekTime, int seekTimePosition, String totalTime, int totalTimeDuration) {
@@ -621,7 +621,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     }
 
 
-    protected Dialog      mVolumeDialog;
+    protected Dialog mVolumeDialog;
     protected ProgressBar mDialogVolumeProgressBar;
 
     @Override

@@ -1,15 +1,12 @@
 package com.xtagwgj.app.ui.user.model;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xtagwgj.app.http.BaseDealApi;
 import com.xtagwgj.app.domain.LoginInfoResponse;
-import com.xtagwgj.app.domain.RequestResult;
+import com.xtagwgj.app.http.ApiStore;
+import com.xtagwgj.app.http.BaseDealApi;
 
 import java.util.List;
 
-import retrofit2.http.POST;
-import retrofit2.http.Query;
-import rx.Observable;
 import rx.Subscriber;
 
 /**
@@ -19,23 +16,10 @@ import rx.Subscriber;
 
 public class UserModel extends BaseDealApi {
 
-    interface ApiStore {
-        @POST("authLogin.do")
-        Observable<RequestResult<List<LoginInfoResponse>>> login(@Query("username") String username,
-                                                                 @Query("password") String password,
-                                                                 @Query("deviceType") int deviceType,
-                                                                 @Query("deviceToken") String deviceToken);
-
-        @POST("authSmsCode.do")
-        Observable<RequestResult<List<String>>> getVerifyCode(@Query("phoneNumber") String phone, @Query("type") int type);
-
-
-    }
-
-    private ApiStore apiStore;
+    private ApiStore.UserController apiStore;
 
     public UserModel() {
-        apiStore = create(ApiStore.class);
+        apiStore = create(ApiStore.UserController.class);
     }
 
     /**

@@ -20,7 +20,7 @@ public class ChangeModeHelper {
      */
     public static void setChangeMode(Context ctx, int mode){
         SharedPreferences sp = ctx.getSharedPreferences("config_mode", Context.MODE_PRIVATE);
-        sp.edit().putInt(Mode, mode).commit();
+        sp.edit().putInt(Mode, mode).apply();
     }
     public static int getChangeMode(Context ctx){
         SharedPreferences sp = ctx.getSharedPreferences("config_mode", Context.MODE_PRIVATE);

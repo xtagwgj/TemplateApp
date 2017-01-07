@@ -1,4 +1,4 @@
-package com.xtagwgj.app;
+package com.xtagwgj.app.base;
 
 import android.os.Environment;
 
@@ -11,7 +11,8 @@ import com.elvishew.xlog.printer.file.FilePrinter;
 import com.elvishew.xlog.printer.file.backup.FileSizeBackupStrategy;
 import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator;
 import com.tencent.bugly.Bugly;
-import com.xtagwgj.app.base.Constant;
+import com.xtagwgj.app.BuildConfig;
+import com.xtagwgj.app.R;
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.loadinglayout.LoadingLayout;
 import com.xtagwgj.retrofitutils.http.ApiRequest;
@@ -53,7 +54,7 @@ public class MyApplication extends BaseApplication {
         //
 
         ApiRequest.instance
-                .initRetrofit("https://iyuns.ylxmall.com/property/")
+                .initRetrofit(ApiPath.getBaseUrl())
 //                .setCertificates(certificatesStream)
                 .showLog(BuildConfig.DEBUG)
 //                .setPublicMap()

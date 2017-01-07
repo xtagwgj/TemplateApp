@@ -45,6 +45,20 @@ public class BaseDealApi extends DealBaseApi implements BaseMvpModel{
     }
 
     /**
+     * 在fragment的生命周期内请求数据
+     */
+    public <T> void requestBindCycle(com.trello.rxlifecycle.components.support.RxFragment context,
+                                     Observable<RequestResult<T>> observable,
+                                     Subscriber<T> subscriber) {
+        observable.retryWhen(new RetryWhenNetworkException())
+                .compose(context.bindToLifecycle())
+                .map(new HttpResultFunc<T>())
+                .compose(this.<T>applySchedulers())
+                .subscribe(subscriber);
+
+    }
+
+    /**
      * 请求数据，忽略生命周期
      */
     public <T> void request(Observable<RequestResult<T>> observable,

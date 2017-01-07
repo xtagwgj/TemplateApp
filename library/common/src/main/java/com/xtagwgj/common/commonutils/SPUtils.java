@@ -52,7 +52,7 @@ public class SPUtils {
             if (sp != null) {
                 SharedPreferences.Editor e = sp.edit();
                 e.putInt(key, val);
-                e.commit();
+                e.apply();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class SPUtils {
             if (sp != null) {
                 SharedPreferences.Editor e = sp.edit();
                 e.putLong(key, val);
-                e.commit();
+                e.apply();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class SPUtils {
             if (sp != null) {
                 SharedPreferences.Editor e = sp.edit();
                 e.putString(key, val);
-                e.commit();
+                e.apply();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,7 +125,7 @@ public class SPUtils {
             if (sp != null) {
                 SharedPreferences.Editor e = sp.edit();
                 e.putBoolean(key, val);
-                e.commit();
+                e.apply();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,7 +138,7 @@ public class SPUtils {
             if (sp != null) {
                 SharedPreferences.Editor e = sp.edit();
                 e.remove(key);
-                e.commit();
+                e.apply();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,7 +151,7 @@ public class SPUtils {
             if (sp != null) {
                 SharedPreferences.Editor e = sp.edit();
                 e.clear();
-                e.commit();
+                e.apply();
             }
         } catch (Exception e) {
             e.printStackTrace();

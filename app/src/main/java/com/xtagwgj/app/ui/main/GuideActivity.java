@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.xtagwgj.app.MyApplication;
+import com.xtagwgj.app.base.MyApplication;
 import com.xtagwgj.app.R;
 import com.xtagwgj.common.base.AppManager;
 import com.xtagwgj.common.base.BaseActivity;
