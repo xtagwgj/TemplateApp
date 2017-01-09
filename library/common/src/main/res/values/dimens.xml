@@ -10,7 +10,7 @@
 
     <dimen name="gudieview_heigh">6dp</dimen>
     <dimen name="gudieview_width">6dp</dimen>
-
+    <dimen name="activity_horization_margin">16dp</dimen>
 
 
     <!--&lt;!&ndash;通用&ndash;&gt;-->

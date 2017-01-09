@@ -43,11 +43,10 @@ dependencies {
     compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${libs.rxbinding}"
     compile "com.jakewharton.rxbinding:rxbinding-support-v4:${libs.rxbinding}"
 
-    //6.0权限管理 http://chen-wei.me/2016/11/10/android-permission-best-practice/
-    compile "pub.devrel:easypermissions:${libs.easypermissions}"
-
     compile "io.reactivex:rxjava:${libs.rxjava}"
     compile "io.reactivex:rxandroid:${libs.rxandroid}"
+    compile "zlc.season:rxdownload:${libs.rxdownload}"
+    compile "com.tbruyelle.rxpermissions:rxpermissions:${libs.rxpermissions}"
 
     compile "com.trello:rxlifecycle:${libs.rxlifecycle}"
     compile "com.trello:rxlifecycle-components:${libs.rxlifecycle}"

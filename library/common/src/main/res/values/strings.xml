@@ -5,5 +5,10 @@
     <string name="loading">请稍后...,&#8230;</string>
     <string name="reload">重新尝试</string>
     <string name="no_net">网络不可用,请检查你的网络</string>
+    <string name="dialog_cancel">下次更新</string>
+    <string name="dialog_download">下载</string>
+    <string name="dialog_title">更新提示</string>
+    <string name="error_empty_updateinfo">没有写明更新信息</string>
+    <string name="error_permission_write_external">没有写文件的权限，不能下载apk文件</string>
 
 </resources>

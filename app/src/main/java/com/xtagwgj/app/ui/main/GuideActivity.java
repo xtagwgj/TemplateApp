@@ -10,26 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.xtagwgj.app.base.MyApplication;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.xtagwgj.app.R;
+import com.xtagwgj.app.base.MyApplication;
 import com.xtagwgj.common.base.AppManager;
 import com.xtagwgj.common.base.BaseActivity;
 import com.xtagwgj.common.commonutils.AppUtils;
 import com.xtagwgj.common.commonutils.SPUtils;
+import com.xtagwgj.common.commonutils.ToastUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
-import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * 用户的引导页面
  * 再此页面申请必要的权限
  */
-public class GuideActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
-
-    private static final int PERMISSION_FILE = 101;
+public class GuideActivity extends BaseActivity {
 
     //引导图片的数组
     private int[] INDICATOR_IDS = {R.mipmap.welcome2, R.mipmap.welcome1};
@@ -54,15 +52,18 @@ public class GuideActivity extends BaseActivity implements EasyPermissions.Permi
     public void initView(Bundle savedInstanceState) {
         loadIndicatorPage();
 
-        //请求权限
+        //请求读写文件的权限，主要是日志文件要使用
         String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        if (EasyPermissions.hasPermissions(this, perms)) {
-
-        } else {
-            EasyPermissions.requestPermissions(this, "存储日志需要读写文件权限",
-                    PERMISSION_FILE, perms);
-        }
+        RxPermissions.getInstance(this)
+                .request(perms)
+                .subscribe(granted -> {
+                    if (granted) {
+                        MyApplication.getAppContext().getLogFile();
+                    } else {
+                        ToastUtils.showShortToastSafe(GuideActivity.this, "存储日志需要读写文件权限");
+                    }
+                });
     }
 
     @Override
@@ -83,23 +84,11 @@ public class GuideActivity extends BaseActivity implements EasyPermissions.Permi
     }
 
 
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-        if (requestCode == PERMISSION_FILE)
-            MyApplication.getAppContext().getLogFile();
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-
-    }
-
-
     class ImagePagerAdapter extends PagerAdapter {
 
         private ArrayList<View> imageViews = new ArrayList<>();
 
-        public ImagePagerAdapter(final Activity context, ImageView.ScaleType scaleType) {
+        ImagePagerAdapter(final Activity context, ImageView.ScaleType scaleType) {
             for (int id : INDICATOR_IDS) {
                 View view = View.inflate(context, R.layout.photo_item,
                         null);
@@ -133,7 +122,7 @@ public class GuideActivity extends BaseActivity implements EasyPermissions.Permi
             container.removeView((View) object);
         }
 
-        public View getView(int index) {
+        View getView(int index) {
             return imageViews.get(index);
         }
 

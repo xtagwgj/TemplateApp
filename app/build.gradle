@@ -23,7 +23,7 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_CHANNEL      : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
 
@@ -91,10 +91,11 @@ android {
     }
 
     //设置虚拟机堆内存空间大小，避免在编译期间OOM
-    dexOptions {
-        incremental true
-        javaMaxHeapSize "4g"
-    }
+//    dexOptions {
+//        incremental true
+//        javaMaxHeapSize "4g"
+//    }
+
     //打包不检查
     lintOptions {
         checkReleaseBuilds false
@@ -116,7 +117,7 @@ dependencies {
 
     //导入的jar包中的文件
     compile project(path: ':library:common')
-//    compile project(path: ':library:irecyclerview')
+    compile project(path: ':library:oneKeyShareSDK')
     compile project(path: ':library:retrofitutils')
     compile project(path: ':library:jcvideoplayer')
 
