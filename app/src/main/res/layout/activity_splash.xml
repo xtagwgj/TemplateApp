@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/bg_splash"
     android:fitsSystemWindows="true"
-    tools:context="com.xtagwgj.app.ui.main.SplashActivity">
+    tools:context="com.xtagwgj.app.com.zyu.app.ui.main.SplashActivity">
 
 
 </RelativeLayout>

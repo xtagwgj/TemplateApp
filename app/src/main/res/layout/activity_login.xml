@@ -7,7 +7,7 @@
     android:background="@color/colorLoginBackground"
     android:fitsSystemWindows="true"
     android:scrollbars="none"
-    tools:context="com.xtagwgj.app.ui.user.LoginActivity">
+    tools:context="com.xtagwgj.app.com.zyu.app.ui.user.LoginActivity">
 
 
     <RelativeLayout
