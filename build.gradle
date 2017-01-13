@@ -72,6 +72,7 @@ ext {
             jpush              : "3.0.0",
             jcore              : "1.0.0",
             freeline           : "0.8.4",
+            adapterHelper      : "2.7.8",
 
     ]
 }

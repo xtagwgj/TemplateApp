@@ -193,7 +193,7 @@ public class MainActivity extends BaseActivity {
 
     private boolean isConsumeBackKey() {
         if ((System.currentTimeMillis() - exitTime) > 2000) {//未处理监听事件，请求后续监听
-            ToastUtils.showShortToastSafe(this, "再按一次退出程序");
+            ToastUtils.showShortToast(this, "再按一次退出程序");
             exitTime = System.currentTimeMillis();
         } else {
             finish();

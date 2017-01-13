@@ -1,4 +1,4 @@
-package com.xtagwgj.common.mvp;
+package com.xtagwgj.common.commonutils;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

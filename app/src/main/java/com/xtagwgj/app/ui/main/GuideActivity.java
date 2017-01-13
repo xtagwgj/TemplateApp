@@ -61,7 +61,7 @@ public class GuideActivity extends BaseActivity {
                     if (granted) {
                         MyApplication.getAppContext().getLogFile();
                     } else {
-                        ToastUtils.showShortToastSafe(GuideActivity.this, "存储日志需要读写文件权限");
+                        ToastUtils.showShortToast(GuideActivity.this, "存储日志需要读写文件权限");
                     }
                 });
     }

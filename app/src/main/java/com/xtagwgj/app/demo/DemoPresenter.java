@@ -76,7 +76,7 @@ class DemoPresenter implements DemoContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-                ToastUtils.showLongToastSafe(context, e.getMessage());
+                ToastUtils.showLongToast(context, e.getMessage());
             }
 
             @Override

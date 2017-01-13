@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Recycler的基本包装类
  * Created by zy on 2016/7/1.
+ * //点击获取列表的时候position有问题
  */
 public abstract class BaseAdapter<T, H extends BaseViewHolder> extends RecyclerView.Adapter<BaseViewHolder> {
 

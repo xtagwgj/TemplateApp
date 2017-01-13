@@ -114,9 +114,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
         Context context = mActivity.get();
         if (context == null) return;
         if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
-            ToastUtils.showShortToastSafe(context, "网络中断，请检查您的网络状态");
+            ToastUtils.showShortToast(context, "网络中断，请检查您的网络状态");
         } else {
-            ToastUtils.showShortToastSafe(context, "错误" + e.getMessage());
+            ToastUtils.showShortToast(context, "错误" + e.getMessage());
             Log.i("tag", "error----------->" + e.toString());
         }
         mSubscriberOnNextListener.onError(e);

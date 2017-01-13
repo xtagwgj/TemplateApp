@@ -90,7 +90,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter, UserModel> im
 
     @Override
     public void loginFail(String errMsg) {
-        ToastUtils.showShortToastSafe(this, errMsg);
+        ToastUtils.showShortToast(this, errMsg);
        //开发使用
         loginSuccess();
     }

@@ -67,4 +67,7 @@ dependencies {
 
     //二维码
     compile "cn.yipianfengye.android:zxing-library:${libs.zxing}"
+
+    //适配器帮助类
+    compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:${libs.adapterHelper}"
 }

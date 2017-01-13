@@ -168,7 +168,7 @@ public class UpdateApkDialog extends AppCompatDialogFragment {
                     @Override
                     public void call(Object o) {
                         Log.d("d", "下载开始");
-                        ToastUtils.showShortToastSafe(getActivity(), "下载开始");
+                        ToastUtils.showShortToast(getActivity(), "下载开始");
                     }
                 });
     }

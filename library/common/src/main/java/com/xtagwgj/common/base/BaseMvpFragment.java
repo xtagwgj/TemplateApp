@@ -149,28 +149,28 @@ public abstract class BaseMvpFragment<T extends BaseMvpPresenter, E extends Base
      * 短暂显示Toast提示(来自String)
      **/
     public void showShortToast(String text) {
-        ToastUtils.showShortToastSafe(getActivity(), text);
+        ToastUtils.showShortToast(getActivity(), text);
     }
 
     /**
      * 短暂显示Toast提示(id)
      **/
     public void showShortToast(int resId) {
-        ToastUtils.showShortToastSafe(getActivity(), resId);
+        ToastUtils.showShortToast(getActivity(), resId);
     }
 
     /**
      * 长时间显示Toast提示(来自res)
      **/
     public void showLongToast(int resId) {
-        ToastUtils.showLongToastSafe(getActivity(), resId);
+        ToastUtils.showLongToast(getActivity(), resId);
     }
 
     /**
      * 长时间显示Toast提示(来自String)
      **/
     public void showLongToast(String text) {
-        ToastUtils.showLongToastSafe(getActivity(), text);
+        ToastUtils.showLongToast(getActivity(), text);
     }
 
 

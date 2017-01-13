@@ -55,12 +55,12 @@ public class ForgetPasswordActivity extends BaseMvpActivity<ForgetPasswordPresen
 
     @Override
     public void sendVerifyCodeSuccess() {
-        ToastUtils.showShortToastSafe(this, "");
+        ToastUtils.showShortToast(this, "");
     }
 
     @Override
     public void sendVerifyCodeFail(String errMsg) {
-        ToastUtils.showShortToastSafe(this, errMsg);
+        ToastUtils.showShortToast(this, errMsg);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ForgetPasswordActivity extends BaseMvpActivity<ForgetPasswordPresen
 
     @Override
     public void resetPasswordFail(String errMsg) {
-        ToastUtils.showShortToastSafe(this, errMsg);
+        ToastUtils.showShortToast(this, errMsg);
     }
 
     @Override

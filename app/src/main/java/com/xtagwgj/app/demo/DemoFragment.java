@@ -10,25 +10,25 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.xtagwgj.app.R;
 import com.xtagwgj.common.base.BaseFragment;
 import com.xtagwgj.common.commonutils.ImageLoaderUtils;
+import com.xtagwgj.common.commonutils.ToastUtils;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import me.nereo.multi_image_selector.MultiImageSelector;
-import pub.devrel.easypermissions.EasyPermissions;
+import rx.functions.Action1;
 
 /**
  * Created by xtagwgj on 2016/12/11.
  */
 
-public class DemoFragment extends BaseFragment implements DemoContract.View, EasyPermissions.PermissionCallbacks {
+public class DemoFragment extends BaseFragment implements DemoContract.View {
     public static final String Arguement_task = "task";
-    private static int PERMISSION_UPLOAD_FILE = 123;
 
     private DemoContract.Presenter mPresenter;
 
@@ -133,14 +133,19 @@ public class DemoFragment extends BaseFragment implements DemoContract.View, Eas
         //请求权限
         String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
-        if (EasyPermissions.hasPermissions(getActivity(), perms)) {
-            MultiImageSelector.create()
-                    .single()
-                    .start(getActivity(), 111);
-        } else {
-            EasyPermissions.requestPermissions(this, "拍照需要摄像头权限",
-                    PERMISSION_UPLOAD_FILE, perms);
-        }
+        RxPermissions.getInstance(getActivity())
+                .request(perms)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            openGallery();
+                        } else {
+                            ToastUtils.showShortToast(getActivity(), "拍照需要摄像头权限");
+                        }
+
+                    }
+                });
 
     }
 
@@ -183,17 +188,4 @@ public class DemoFragment extends BaseFragment implements DemoContract.View, Eas
                 .start(getActivity(), 111);
     }
 
-    //请求权限成功 处理
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-        if (requestCode == PERMISSION_UPLOAD_FILE)
-            openGallery();
-    }
-
-
-    //请求权限失败 弹出提示
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-
-    }
 }

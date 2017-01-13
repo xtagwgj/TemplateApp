@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.elvishew.xlog.XLog;
 import com.xtagwgj.app.R;
 import com.xtagwgj.common.base.BaseActivity;
-import com.xtagwgj.common.mvp.ActivityUtils;
+import com.xtagwgj.common.commonutils.ActivityUtils;
 
 import java.util.List;
 
