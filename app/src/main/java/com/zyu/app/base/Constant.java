@@ -8,7 +8,7 @@ package com.zyu.app.base;
 public class Constant {
 
     //启动页面显示时间
-    public static final int SPLASH_TIME = 3;
+    public static final int SPLASH_TIME_3 = 3;
 
     //button防抖时间
     public static final long THROTTLE_TIME = 2;

@@ -24,6 +24,8 @@
             android:name="com.xtagwgj.common.glide_okhttp_integration.CustomGlideModule"
             android:value="GlideModule" />
 
+        <service android:name=".base.InitializeService"/>
+
         <activity
             android:name=".ui.main.SplashActivity">
             <intent-filter>

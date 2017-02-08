@@ -4,6 +4,7 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
+ * 关闭IO
  * Created by xtagwgj on 2016/12/13.
  */
 

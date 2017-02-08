@@ -9,6 +9,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
+ * 编码工具
  * Created by xtagwgj on 2016/12/13.
  */
 

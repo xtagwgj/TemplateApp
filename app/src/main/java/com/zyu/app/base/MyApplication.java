@@ -10,16 +10,10 @@ import com.elvishew.xlog.formatter.message.throwable.DefaultThrowableFormatter;
 import com.elvishew.xlog.printer.file.FilePrinter;
 import com.elvishew.xlog.printer.file.backup.FileSizeBackupStrategy;
 import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator;
-import com.tencent.bugly.Bugly;
-import com.zyu.app.BuildConfig;
-import com.zyu.app.R;
 import com.xtagwgj.common.BaseApplication;
-import com.xtagwgj.common.loadinglayout.LoadingLayout;
-import com.xtagwgj.retrofitutils.http.ApiRequest;
+import com.zyu.app.BuildConfig;
 
 import java.io.File;
-
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 应用
@@ -39,31 +33,12 @@ public class MyApplication extends BaseApplication {
         super.onCreate();
         baseApplication = this;
 
-        initNet();
-        initPush();
-        initLoadingLayout();
         initLogger();
+        InitializeService.start(this);
     }
 
-    private void initPush() {
-        JPushInterface.setDebugMode(BuildConfig.DEBUG);
-        JPushInterface.init(this);
-    }
-
-    private void initNet() {
-        //
-
-        ApiRequest.instance
-                .initRetrofit(ApiPath.getBaseUrl())
-//                .setCertificates(certificatesStream)
-                .showLog(BuildConfig.DEBUG)
-//                .setPublicMap()
-                .build();
-    }
 
     private void initLogger() {
-        //初始化bugly日志
-        Bugly.init(getApplicationContext(), Constant.CrashAppId, BuildConfig.DEBUG);
 
         //初始化其他日志
         if (BuildConfig.DEBUG) {
@@ -90,21 +65,6 @@ public class MyApplication extends BaseApplication {
                             .build());
     }
 
-    private void initLoadingLayout() {
-        LoadingLayout.getConfig()
-                .setErrorText("出错啦~请稍后重试！")
-                .setEmptyText("抱歉，暂无数据")
-                .setNoNetworkText("无网络连接，请检查您的网络···")
-                .setErrorImage(R.mipmap.define_error)
-                .setEmptyImage(R.mipmap.define_empty)
-                .setNoNetworkImage(R.mipmap.define_nonetwork)
-                .setAllTipTextColor(R.color.gray)
-                .setAllTipTextSize(14)
-                .setReloadButtonText("点我重试哦")
-                .setReloadButtonTextSize(14)
-                .setReloadButtonTextColor(R.color.gray)
-                .setReloadButtonWidthAndHeight(150, 40);
-    }
 
     /**
      * android 6.0以上要注意动态申请权限，否则不回打印日志到文件（日志文件保存在download的文件夹中）

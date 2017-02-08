@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.xtagwgj.common.BaseApplication;
 import com.xtagwgj.common.R;
 
+import io.github.zhitaocai.toastcompat.ToastCompat;
+
 /**
  * Toast统一管理类
  * Created by xtagwgj on 2016/12/10.
@@ -31,8 +33,8 @@ public class ToastUtils {
      * @param context 上下文
      * @param text    文本
      */
-    public static void showShortToast(Context context, CharSequence text) {
-        XToast.showShort(context, text);
+    public static void showShortToast(Context context, String text) {
+        ToastCompat.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -42,7 +44,7 @@ public class ToastUtils {
      * @param resId   资源Id
      */
     public static void showShortToast(Context context, int resId) {
-        XToast.showShort(context, context.getResources().getString(resId));
+        ToastCompat.makeText(context, context.getResources().getString(resId), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -52,8 +54,8 @@ public class ToastUtils {
      * @param context 上下文
      * @param text    文本
      */
-    public static void showLongToast(final Context context, final CharSequence text) {
-        XToast.showLong(context, text);
+    public static void showLongToast(final Context context, final String text) {
+        ToastCompat.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -63,7 +65,7 @@ public class ToastUtils {
      * @param resId   资源Id
      */
     public static void showLongToast(final Context context, final int resId) {
-        XToast.showLong(context, context.getString(resId));
+        ToastCompat.makeText(context, context.getResources().getString(resId), Toast.LENGTH_LONG).show();
     }
 
 
@@ -74,8 +76,8 @@ public class ToastUtils {
      * @param text     文本
      * @param duration 显示时长
      */
-    private static void showToast(Context context, CharSequence text, int duration) {
-        XToast.show(context, text, duration);
+    private static void showToast(Context context, String text, int duration) {
+        ToastCompat.makeText(context, text, duration).show();
     }
 
     /**
@@ -86,7 +88,7 @@ public class ToastUtils {
      * @param duration 显示时长
      */
     private static void showToast(Context context, int resId, int duration) {
-        XToast.show(context, context.getResources().getText(resId).toString(), duration);
+        ToastCompat.makeText(context, context.getResources().getText(resId).toString(), duration).show();
     }
 
 
@@ -118,10 +120,4 @@ public class ToastUtils {
 
     }
 
-    /**
-     * 取消吐司显示
-     */
-    public static void cancelToast() {
-        XToast.cancel();
-    }
 }

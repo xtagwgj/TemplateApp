@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.SystemClock;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -21,14 +20,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import butterknife.internal.Utils;
-
 /**
  * Created by xtagwgj on 2016/12/13.
  */
 
-public class PhoneUtils {
-    private PhoneUtils(Context mContext) {
+public class DeviceUtils {
+    private DeviceUtils(Context mContext) {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -284,37 +281,6 @@ public class PhoneUtils {
         // 12.关闭cursor
         cursor.close();
         return list;
-    }
-
-    /**
-     * 打开手机联系人界面点击联系人后便获取该号码
-     * <p>参照以下注释代码</p>
-     */
-    public static void getContactNum(Context mContext) {
-        Log.d("tips", "U should copy the following code.");
-        /*
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.PICK");
-        intent.setType("vnd.android.cursor.dir/phone_v2");
-        startActivityForResult(intent, 0);
-        @Override
-        protected void onActivityResult ( int requestCode, int resultCode, Intent data){
-            super.onActivityResult(requestCode, resultCode, data);
-            if (data != null) {
-                Uri uri = data.getData();
-                String num = null;
-                // 创建内容解析者
-                ContentResolver contentResolver = getContentResolver();
-                Cursor cursor = contentResolver.query(uri,
-                        null, null, null, null);
-                while (cursor.moveToNext()) {
-                    num = cursor.getString(cursor.getColumnIndex("data1"));
-                }
-                cursor.close();
-                num = num.replaceAll("-", "");//替换的操作,555-6 -> 5556
-            }
-        }
-        */
     }
 
     /**

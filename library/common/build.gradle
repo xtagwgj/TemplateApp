@@ -70,4 +70,6 @@ dependencies {
 
     //适配器帮助类
     compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:${libs.adapterHelper}"
+
+    compile "io.github.zhitaocai:toastcompat:${libs.toastcompat}"
 }

@@ -35,7 +35,7 @@ public class SplashActivity extends BaseActivity {
                     .create((Subscriber<? super Void> subscriber) -> {
                         subscriber.onNext(null);
                     })
-                    .delay(Constant.SPLASH_TIME, TimeUnit.SECONDS)
+                    .delay(Constant.SPLASH_TIME_3, TimeUnit.SECONDS)
                     .subscribe(aVoid -> {
                         LoginActivity.startAction(SplashActivity.this);
 //                        MainActivity.startAction(SplashActivity.this);

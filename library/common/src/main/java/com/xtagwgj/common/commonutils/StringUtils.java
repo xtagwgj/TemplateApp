@@ -1,5 +1,12 @@
 package com.xtagwgj.common.commonutils;
 
+import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+
+import java.util.List;
+
 /**
  * Created by xtagwgj on 2016/12/13.
  */
@@ -172,4 +179,107 @@ public class StringUtils {
         }
         return new String(chars);
     }
+
+    /**
+     * 给填写搜索单词的关键词显示 特殊颜色
+     *
+     * @param word    关键词
+     * @param input   待搜索的单词
+     * @param color   颜色资源
+     * @param context
+     * @return
+     */
+    public static SpannableStringBuilder changeTextColor(String word, String input, int color, Context context) {
+        int len = input.length();
+        int start = 0;
+        int end = 0;
+        int position = 0;
+        SpannableStringBuilder style = new SpannableStringBuilder(word);
+        while (true) {
+            position = word.indexOf(input, end);
+            if (-1 == position) {
+                break;
+            }
+            start = position;
+            end = start + len;
+            style.setSpan(new ForegroundColorSpan(context.getResources().getColor(color)), start, end,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        }
+        return style;
+    }
+
+    /**
+     * 判断集合时候为空
+     * @param list 集合
+     * @return
+     */
+    public static boolean isEmpty(List list) {
+        return list == null || list.size() == 0;
+    }
+
+    /**
+     * 描述：截取字符串到指定字节长度.
+     *
+     * @param str    the str
+     * @param length 指定字节长度
+     * @return 截取后的字符串
+     */
+    public static String cutString(String str, int length) {
+        return cutString(str, length, "");
+    }
+
+    /**
+     * 描述：截取字符串到指定字节长度.
+     *
+     * @param str    文本
+     * @param length 字节长度
+     * @param dot    省略符号
+     * @return 截取后的字符串
+     */
+    public static String cutString(String str, int length, String dot) {
+        int strBLen = strlen(str, "GBK");
+        if (strBLen <= length) {
+            return str;
+        }
+        int temp = 0;
+        StringBuffer sb = new StringBuffer(length);
+        char[] ch = str.toCharArray();
+        for (char c : ch) {
+            sb.append(c);
+            if (c > 256) {
+                temp += 2;
+            } else {
+                temp += 1;
+            }
+            if (temp >= length) {
+                if (dot != null) {
+                    sb.append(dot);
+                }
+                break;
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 描述：获取字节长度.
+     *
+     * @param str     文本
+     * @param charset 字符集（GBK）
+     * @return the int
+     */
+    public static int strlen(String str, String charset) {
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
+        int length = 0;
+        try {
+            length = str.getBytes(charset).length;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return length;
+    }
+
+
 }

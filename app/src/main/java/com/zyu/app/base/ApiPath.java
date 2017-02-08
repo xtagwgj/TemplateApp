@@ -8,7 +8,7 @@ package com.zyu.app.base;
 public class ApiPath {
     private static final String BASE_URL = "http://10.168.100.28:8080/propertyApp/";
 
-    public static String getBaseUrl() {
+    static String getBaseUrl() {
         return BASE_URL;
     }
 

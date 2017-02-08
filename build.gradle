@@ -39,8 +39,8 @@ ext {
             targetSdk           : 25,
             version_code        : 1,
             version_name        : "1.0.0",
-            debug_app_name      : "测试版",
-            release_app_name    : "物管正式版",
+            debug_app_name      : "开发Demo",
+            release_app_name    : "开发正式版",
             JPUSH_APPKEY_DEBUG  : "93e9d5d67c95778705159d49",//开发用的appkey
             JPUSH_APPKEY_RELEASE: "59dfbc9090c13a1d910d9dab",//正式版本的appkey，修改package的时候要及时修改
     ]
@@ -73,6 +73,7 @@ ext {
             jcore              : "1.0.0",
             freeline           : "0.8.4",
             adapterHelper      : "2.7.8",
+            toastcompat        : "0.1.0",
 
     ]
 }
