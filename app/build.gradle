@@ -1,13 +1,17 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jakewharton.hugo'
 
 def cfg = rootProject.ext.configuration //配置
 def libs = rootProject.ext.libraries    //第三方库
+Properties props = new Properties()
+props.load(new FileInputStream(file(rootProject.file("signing.properties"))))
 
 android {
     compileSdkVersion cfg.compileVersion
     buildToolsVersion cfg.buildToolsVersion
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId cfg.package_name_debug
@@ -25,17 +29,29 @@ android {
         manifestPlaceholders = [
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-//    signingConfigs {
-//        release {
-//            storeFile file("${rootProject.keystore_file}")
-//            storePassword "${rootProject.store_pwd}"
-//            keyAlias "${rootProject.alias_key}"
-//            keyPassword "${rootProject.key_pwd}"
-//        }
-//    }
+    //签名配置
+    signingConfigs {
+        release {
+            keyAlias props['signing.alila']
+            keyPassword props['signing.password']
+//            storeFile file(rootProject.file("xtawgj_template_z4.jks"))
+            storeFile file("xtawgj_template_z4.jks")
+            storePassword props['signing.password']
+        }
 
+        debug {
+            keyAlias props['signing.alila']
+            keyPassword props['signing.password']
+            storeFile file('xtawgj_template_z4.jks')
+            storePassword props['signing.password']
+        }
+    }
+
+    //自动打包环境
     buildTypes {
         debug {
             resValue "string", "app_name", "${cfg.debug_app_name}"
@@ -47,7 +63,7 @@ android {
                     JPUSH_RECEIVER_NAME: "${cfg.package_name_debug}.receiver.JPushReceiver", //根据包名动态修改JPush接收者的路径
             ]
 
-//            applicationIdSuffix ".debug"//会影响manifest中的配置，删除的话要及时修改
+            //applicationIdSuffix ".debug"//会影响manifest中的配置，删除的话要及时修改
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
@@ -68,7 +84,7 @@ android {
             zipAlignEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
 
             //apk命名
             android.applicationVariants.all { variant ->
@@ -88,6 +104,7 @@ android {
         exclude "META-INF/LICENSE"
         exclude "META-INF/NOTICE"
         exclude "META-INF/LICENSE.txt"
+        exclude "META-INF/rxjava.properties"
     }
 
     //设置虚拟机堆内存空间大小，避免在编译期间OOM
@@ -107,33 +124,41 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    // 默认情况下gradle会选用版本最高的那个依赖，有时候会带来问题
+    configurations.all {
+        // 有版本冲突的时候强制使用指定的版本，对于相关依赖也同样有效
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
 
     //导入的android的系统包
-//    compile "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}"
+    //compile "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}"
 
     //导入的jar包中的文件
     compile project(path: ':library:common')
-    compile project(path: ':library:oneKeyShareSDK')
+    //compile project(path: ':library:oneKeyShareSDK')
     compile project(path: ':library:retrofitutils')
-    compile project(path: ':library:jcvideoplayer')
+    //compile project(path: ':library:jcvideoplayer')
 
     //依赖的第三方包
-
     compile "com.jcodecraeer:xrecyclerview:${libs.xrecyclerview}"
-
     compile "com.flyco.tablayout:FlycoTabLayout_Lib:${libs.flyco_tablayout}"
 
     //dagger
-//    compile "com.google.dagger:dagger:${libs.dagger}"
-//    apt "com.google.dagger:dagger-compiler:${libs.dagger}"
-//    provided "org.glassfish:javax.annotation:${libs.javax_annotation}"
+    //compile "com.google.dagger:dagger:${libs.dagger}"
+    //apt "com.google.dagger:dagger-compiler:${libs.dagger}"
+    //provided "org.glassfish:javax.annotation:${libs.javax_annotation}"
 
     //butterknife
-    compile "com.jakewharton:butterknife:${libs.butterknief}"//view注解
+    compile "com.jakewharton:butterknife:${libs.butterknief}"
+    //view注解
     apt "com.jakewharton:butterknife-compiler:${libs.butterknief}"
 
     //日志
@@ -147,7 +172,10 @@ dependencies {
     // 此处以JCore 1.0.0 版本为例。
     compile "cn.jiguang.sdk:jcore:${libs.jcore}"
 
-    testCompile 'junit:junit:4.12'
+    //Bmob使用
+    compile "cn.bmob.android:bmob-sdk:${libs.bmob}"
+    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    compile "cn.bmob.android:http-legacy:${libs.http_legacy}"
 }
 
 def releaseTime() {

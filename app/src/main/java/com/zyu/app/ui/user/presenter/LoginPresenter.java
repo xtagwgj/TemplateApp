@@ -9,6 +9,8 @@ import com.xtagwgj.retrofitutils.http.listener.HttpOnNextListener;
 
 import java.util.List;
 
+import hugo.weaving.DebugLog;
+
 /**
  * 登录的处理
  * Created by xtagwgj on 2016/12/15.
@@ -22,6 +24,7 @@ public class LoginPresenter extends LoginContract.Presenter {
         showLastLoginInfo();
     }
 
+    @DebugLog
     @Override
     public void toLogin(String account, String password, boolean rememberPwd) {
 

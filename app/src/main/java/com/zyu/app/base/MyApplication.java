@@ -19,7 +19,6 @@ import java.io.File;
  * 应用
  * Created by xtagwgj on 2016/12/10.
  */
-
 public class MyApplication extends BaseApplication {
 
     private static MyApplication baseApplication;

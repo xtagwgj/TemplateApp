@@ -10,6 +10,10 @@ import com.elvishew.xlog.XLog;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.xtagwgj.common.base.AppManager;
+import com.xtagwgj.common.base.BaseActivity;
+import com.xtagwgj.common.commonutils.ToastUtils;
+import com.xtagwgj.common.commonwidget.NormalTitleBar;
 import com.zyu.app.R;
 import com.zyu.app.base.Constant;
 import com.zyu.app.domain.TabEntity;
@@ -17,10 +21,6 @@ import com.zyu.app.ui.board.BoardFragment;
 import com.zyu.app.ui.maintain.MaintainFragment;
 import com.zyu.app.ui.management.ManagementFragment;
 import com.zyu.app.ui.me.MeFragment;
-import com.xtagwgj.common.base.AppManager;
-import com.xtagwgj.common.base.BaseActivity;
-import com.xtagwgj.common.commonutils.ToastUtils;
-import com.xtagwgj.common.commonwidget.NormalTitleBar;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-
         titleBar.setBackVisibility(false);
 
         initTab();

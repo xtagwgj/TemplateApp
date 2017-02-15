@@ -11,6 +11,9 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+        //添加hugo 性能调优
+        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+
     }
 }
 
@@ -22,6 +25,8 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        //Bmob的maven仓库地址--必填
+        maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
     }
 }
 
@@ -74,6 +79,10 @@ ext {
             freeline           : "0.8.4",
             adapterHelper      : "2.7.8",
             toastcompat        : "0.1.0",
+            autolayout         : "1.4.3",
+            bmob               : "3.5.0",
+            http_legacy        : "1.0",
+
 
     ]
 }

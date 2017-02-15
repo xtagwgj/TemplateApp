@@ -17,7 +17,6 @@ import cn.jpush.android.api.JPushInterface;
  * 初始化服务
  * Created by xtagwgj on 2017/2/6.
  */
-
 public class InitializeService extends IntentService {
 
     private static final String ACTION_INIT_WHEN_APP_CREATE = "com.xtagwgj.service.action.INIT";
