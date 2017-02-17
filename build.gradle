@@ -82,6 +82,7 @@ ext {
             autolayout         : "1.4.3",
             bmob               : "3.5.0",
             http_legacy        : "1.0",
+            guava        : "21.0",
 
 
     ]

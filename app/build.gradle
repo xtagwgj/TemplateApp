@@ -150,6 +150,7 @@ dependencies {
     //依赖的第三方包
     compile "com.jcodecraeer:xrecyclerview:${libs.xrecyclerview}"
     compile "com.flyco.tablayout:FlycoTabLayout_Lib:${libs.flyco_tablayout}"
+    compile "com.google.guava:guava:${libs.guava}"
 
     //dagger
     //compile "com.google.dagger:dagger:${libs.dagger}"
