@@ -1,5 +1,4 @@
 include ':app'
 include ':library:common'
 //include ':library:oneKeyShareSDK'
-include ':library:retrofitutils'
 //include ':library:jcvideoplayer'

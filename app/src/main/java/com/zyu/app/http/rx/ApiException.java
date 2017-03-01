@@ -1,16 +1,15 @@
-package com.zyu.app.http;
+package com.zyu.app.http.rx;
 
-import com.zyu.app.base.MyApplication;
-import com.zyu.app.R;
 import com.xtagwgj.common.commonutils.NetWorkUtils;
 import com.xtagwgj.common.commonutils.StringUtils;
+import com.zyu.app.R;
+import com.zyu.app.base.MyApplication;
 
 /**
- * 对服务器返回的错误代码或信息进行处理
- * Created by xtagwgj on 2016/12/13.
+ * Created by xtagwgj on 2017/3/1.
  */
 
-class ApiException extends RuntimeException {
+public class ApiException extends RuntimeException {
     private static final int Error_400 = 400;
     private static final int Error_404 = 404;
     private static final int Error_408 = 408;
@@ -19,12 +18,30 @@ class ApiException extends RuntimeException {
     private static final int USER_NOT_EXIST = 100;
     private static final int WRONG_PASSWORD = 101;
 
-    private ApiException(int resultCode, String detailsMessage) {
+    protected ApiException(int resultCode, String detailsMessage) {
         super(getApiExceptionMessage(resultCode, detailsMessage));
     }
 
-    ApiException(String resultCode, String detailsMessage) {
-        this(Integer.valueOf(resultCode), detailsMessage);
+    protected ApiException(String resultCode, String detailsMessage) {
+        this(getApiExceptionMessage(Integer.valueOf(resultCode), detailsMessage));
+    }
+
+    ApiException(String detailsMessage) {
+        super(getApiExceptionMessage(detailsMessage));
+    }
+
+    /**
+     * 由于服务器传递过来的错误信息直接给用户看的话，用户未必能够理解
+     * 需要根据错误码对错误信息进行一个转换，在显示给用户
+     *
+     * @param detailsMessage 响应信息
+     */
+    private static String getApiExceptionMessage(String detailsMessage) {
+        if (!NetWorkUtils.isNetConnected(MyApplication.getAppContext())) {
+            return MyApplication.getAppContext().getResources().getString(R.string.no_net);
+        }
+
+        return detailsMessage;
     }
 
 

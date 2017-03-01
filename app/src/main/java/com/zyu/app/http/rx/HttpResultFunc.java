@@ -1,6 +1,7 @@
-package com.zyu.app.http;
+package com.zyu.app.http.rx;
 
 import com.elvishew.xlog.XLog;
+import com.xtagwgj.common.commonutils.StringUtils;
 import com.zyu.app.domain.RequestResult;
 
 import rx.functions.Func1;
@@ -13,17 +14,20 @@ import rx.functions.Func1;
 
 public class HttpResultFunc<T> implements Func1<RequestResult<T>, T> {
 
-    private static final String Tag = "HttpResultFunc";
-
     @Override
     public T call(RequestResult<T> tRequestResult) {
-        XLog.e(Tag, "服务器返回等待处理的数据: ");
+        XLog.d(String.format("服务器返回信息: %s " ,tRequestResult));
 
         if (!tRequestResult.isSuccess()) {
-            XLog.e(Tag, "服务器返回数据携带错误信息: " + tRequestResult.getError_code() + "->" + tRequestResult.getError_desc());
-            throw new ApiException(tRequestResult.getError_code(), tRequestResult.getError_desc());
+
+            if (StringUtils.isEmpty(tRequestResult.getError_code()))
+                throw new ApiException(tRequestResult.getError_desc());
+            else
+                throw new ApiException(tRequestResult.getError_code(), tRequestResult.getError_desc());
+
         }
 
         return tRequestResult.getObj();
     }
+
 }

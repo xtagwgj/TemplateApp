@@ -1,18 +1,15 @@
 package com.zyu.app.demo.api;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.zyu.app.http.BaseDealApi;
 import com.zyu.app.demo.model.AdvertisementResponse;
 import com.zyu.app.demo.model.FileResponse;
 import com.zyu.app.domain.LoginInfoResponse;
 import com.zyu.app.domain.RequestResult;
+import com.zyu.app.http.rx.RxBaseModel;
 
-import java.io.File;
 import java.util.List;
 
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -26,12 +23,12 @@ import rx.Subscriber;
  * Created by xtagwgj on 16/9/25.
  */
 
-public class ApiDemo extends BaseDealApi {
+public class ApiDemo extends RxBaseModel {
 
-    private ApiStore apiStore;
+
 
     public ApiDemo() {
-        apiStore = create(ApiStore.class);
+
     }
 
     /**
@@ -42,10 +39,11 @@ public class ApiDemo extends BaseDealApi {
      * @param password   密码
      * @param subscriber
      */
-    public void login(String username, String password,
-                      Subscriber<List<LoginInfoResponse>> subscriber) {
+    public <T> void login(String username, String password,
+                      Subscriber<T> subscriber) {
 
-        request(apiStore.login(username, password, 0, "0"), subscriber);
+
+
     }
 
     /**
@@ -57,7 +55,7 @@ public class ApiDemo extends BaseDealApi {
      * @param subscriber
      */
     public void getAd(RxAppCompatActivity context, String code, int type, Subscriber<List<AdvertisementResponse>> subscriber) {
-        requestBindCycle(context, apiStore.getAd(code, type), subscriber);
+
     }
 
     /**
@@ -68,10 +66,10 @@ public class ApiDemo extends BaseDealApi {
      * @param subscriber
      */
     public void uploadPic(RxAppCompatActivity context, String filePath, Subscriber<List<FileResponse>> subscriber) {
-        File file = new File(filePath);
-        RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part imageBodyPart = MultipartBody.Part.createFormData("img", file.getName(), imageBody);
-        requestBindCycle(context, apiStore.uploadImage(imageBodyPart), subscriber);
+//        File file = new File(filePath);
+//        RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//        MultipartBody.Part imageBodyPart = MultipartBody.Part.createFormData("img", file.getName(), imageBody);
+//        requestBindCycle(context, apiStore.uploadImage(imageBodyPart), subscriber);
     }
 
     /**

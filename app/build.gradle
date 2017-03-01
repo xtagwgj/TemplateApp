@@ -30,6 +30,9 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
 
+        //服务器地址相关
+        buildConfigField "String","BASE_URL","\"http://183.61.80.249:8080/system/Pos/\""//物业 正式服务器
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -144,13 +147,11 @@ dependencies {
     //导入的jar包中的文件
     compile project(path: ':library:common')
     //compile project(path: ':library:oneKeyShareSDK')
-    compile project(path: ':library:retrofitutils')
     //compile project(path: ':library:jcvideoplayer')
 
     //依赖的第三方包
     compile "com.jcodecraeer:xrecyclerview:${libs.xrecyclerview}"
     compile "com.flyco.tablayout:FlycoTabLayout_Lib:${libs.flyco_tablayout}"
-    compile "com.google.guava:guava:${libs.guava}"
 
     //dagger
     //compile "com.google.dagger:dagger:${libs.dagger}"
@@ -173,10 +174,9 @@ dependencies {
     // 此处以JCore 1.0.0 版本为例。
     compile "cn.jiguang.sdk:jcore:${libs.jcore}"
 
-    //Bmob使用
-    compile "cn.bmob.android:bmob-sdk:${libs.bmob}"
-    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
-    compile "cn.bmob.android:http-legacy:${libs.http_legacy}"
+    compile "com.lzy.net:okgo:${libs.latest}"       //可以单独使用，不需要依赖下方的扩展包
+    compile "com.lzy.net:okrx:${libs.latest}"        //RxJava扩展支持，根据需要添加
+
 }
 
 def releaseTime() {

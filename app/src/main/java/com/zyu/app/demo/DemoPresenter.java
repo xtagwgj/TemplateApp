@@ -2,14 +2,10 @@ package com.zyu.app.demo;
 
 import com.elvishew.xlog.XLog;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.xtagwgj.common.commonutils.ToastUtils;
 import com.zyu.app.demo.api.ApiDemo;
 import com.zyu.app.demo.model.AdvertisementResponse;
 import com.zyu.app.demo.model.FileResponse;
-import com.zyu.app.domain.LoginInfoResponse;
-import com.xtagwgj.common.commonutils.ToastUtils;
-import com.xtagwgj.retrofitutils.http.ApiRequest;
-import com.xtagwgj.retrofitutils.http.factory.ProgressSubscriber;
-import com.xtagwgj.retrofitutils.http.listener.HttpOnNextListener;
 
 import java.util.List;
 
@@ -43,24 +39,24 @@ class DemoPresenter implements DemoContract.Presenter {
     @Override
     public void login(String username, String password) {
 
-        apiDemo.login(username, password,
-                new ProgressSubscriber<>(new HttpOnNextListener<List<LoginInfoResponse>>() {
-                    @Override
-                    public void onNext(List<LoginInfoResponse> o) {
-                        if (o != null) {
-                            LoginInfoResponse loginInfoResponse = o.get(0);
-                            XLog.d(loginInfoResponse);
-                            mView.setLoginInfo(loginInfoResponse.toString());
-                        } else {
-                            ToastUtils.showLongToast(context, "o is null");
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        ToastUtils.showLongToast(context, throwable == null ? "throwable is null" : throwable.getMessage());
-                    }
-                }, context));
+//        apiDemo.login(username, password,
+//                new ProgressSubscriber<>(new HttpOnNextListener<List<LoginInfoResponse>>() {
+//                    @Override
+//                    public void onNext(List<LoginInfoResponse> o) {
+//                        if (o != null) {
+//                            LoginInfoResponse loginInfoResponse = o.get(0);
+//                            XLog.d(loginInfoResponse);
+//                            mView.setLoginInfo(loginInfoResponse.toString());
+//                        } else {
+//                            ToastUtils.showLongToast(context, "o is null");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable throwable) {
+//                        ToastUtils.showLongToast(context, throwable == null ? "throwable is null" : throwable.getMessage());
+//                    }
+//                }, context));
     }
 
     /**
@@ -102,8 +98,8 @@ class DemoPresenter implements DemoContract.Presenter {
             @Override
             public void onNext(List<FileResponse> fileResponses) {
                 XLog.e(fileResponses);
-                if (fileResponses != null && fileResponses.size() > 0)
-                    mView.showPic(ApiRequest.instance.getBASE_URL() + fileResponses.get(0).getSavePath());
+//                if (fileResponses != null && fileResponses.size() > 0)
+//                    mView.showPic(ApiRequest.instance.getBASE_URL() + fileResponses.get(0).getSavePath());
             }
         });
     }
